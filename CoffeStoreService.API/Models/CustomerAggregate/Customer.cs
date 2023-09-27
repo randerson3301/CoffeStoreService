@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using CoffeStoreService.API.Resources;
+using System.Collections.ObjectModel;
 
 namespace CoffeStoreService.API.Models.CustomerAggregate
 {
@@ -12,7 +13,7 @@ namespace CoffeStoreService.API.Models.CustomerAggregate
         public string Document { get; }
         public ReadOnlyCollection<DeliveryAddress> DeliveryAddress => _deliveryAddresses.AsReadOnly();
 
-        private List<DeliveryAddress> _deliveryAddresses;
+        private readonly List<DeliveryAddress> _deliveryAddresses;
 
         public Customer(string fullName, DateOnly birthDate, string document)
         {
@@ -27,6 +28,16 @@ namespace CoffeStoreService.API.Models.CustomerAggregate
         public void AddAddress(DeliveryAddress newAddress)
         {
             _deliveryAddresses.Add(newAddress);
+        }
+
+        public void RemoveAddress(DeliveryAddress addressToRemove)
+        {            
+            if (_deliveryAddresses.HasSingleElement())
+            {
+                throw new Exception(ErrorMessages.CANNOT_REMOVE_ADDRESS);
+            }
+
+            _deliveryAddresses.Remove(addressToRemove);
         }
     }
 }
