@@ -13,13 +13,16 @@ namespace CoffeStoreService.API.Models.CustomerAggregate
         public string Document { get; }
         public ReadOnlyCollection<DeliveryAddress> DeliveryAddress => _deliveryAddresses.AsReadOnly();
 
+        public CustomerAccess CustomerAccess { get; set; }
+
         private readonly List<DeliveryAddress> _deliveryAddresses;
 
-        public Customer(string fullName, DateOnly birthDate, string document)
+        public Customer(string fullName, DateOnly birthDate, string document, CustomerAccess customerAccess)
         {
             FullName = fullName;
             BirthDate = birthDate;
             Document = document;
+            CustomerAccess = customerAccess;
             _deliveryAddresses = new List<DeliveryAddress>();
             _id = Guid.NewGuid();
         }
@@ -39,5 +42,16 @@ namespace CoffeStoreService.API.Models.CustomerAggregate
 
             _deliveryAddresses.Remove(addressToRemove);
         }
+
+        public void UpdateAddress(DeliveryAddress newAddress)
+        {
+            var existingAddress = _deliveryAddresses.Find(a => a.ZipCode == newAddress.ZipCode);
+
+            if(existingAddress != null)
+            {
+                AddAddress(newAddress);
+                RemoveAddress(existingAddress);
+            }
+        }        
     }
 }

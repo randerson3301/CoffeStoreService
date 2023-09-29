@@ -17,7 +17,8 @@ namespace CoffeStoreService.Tests.ModelTests
         [Test]
         public void Add_DeliveryAddress_CustomerAddressesContainsSameAddress()
         {
-            var customer = new Customer("Test", DateOnly.MinValue, "1234");
+            var customerAccess = new CustomerAccess("teste@teste.com", "senha123");
+            var customer = new Customer("Test", DateOnly.MinValue, "1234", customerAccess);
             var newAddress = new DeliveryAddress("123", "Rua Test", 123, "bloco 8", "Vila Test", "Test City", "SP");
 
             customer.AddAddress(newAddress);
@@ -28,7 +29,8 @@ namespace CoffeStoreService.Tests.ModelTests
         [Test]
         public void Remove_DeliveryAddress_CustomerAddressesDoNotContainsTheAddress()
         {
-            var customer = new Customer("Test", DateOnly.MinValue, "1234");
+            var customerAccess = new CustomerAccess("teste@teste.com", "senha123");
+            var customer = new Customer("Test", DateOnly.MinValue, "1234", customerAccess);
             var addressToRemove = new DeliveryAddress("123", "Rua Test", 123, "bloco 8", "Vila Test", "Test City", "SP");
             var addressToRemove2 = new DeliveryAddress("123", "Rua Test", 123, "bloco 8", "Vila Test", "Test City", "SP");
 
@@ -43,7 +45,8 @@ namespace CoffeStoreService.Tests.ModelTests
         [Test]
         public void Remove_DeliveryAddress_ThrowsErrorIfCustomerAddressesIsEmpty()
         {
-            var customer = new Customer("Test", DateOnly.MinValue, "1234");
+            var customerAccess = new CustomerAccess("teste@teste.com", "senha123");
+            var customer = new Customer("Test", DateOnly.MinValue, "1234", customerAccess);
             var addressToRemove = new DeliveryAddress("123", "Rua Test", 123, "bloco 8", "Vila Test", "Test City", "SP");
 
             var expectedExceptionMessage = "Could not remove the address since customer should have at least one delivery address";
@@ -56,6 +59,32 @@ namespace CoffeStoreService.Tests.ModelTests
             }).Message;
 
             Assert.AreEqual(expectedExceptionMessage, actualExceptionMessage);
-        }        
+        }
+
+
+
+        [Test]
+        public void Update_DeliveryAddress_CustomerAddressesContainsUpdatedAddress()
+        {
+            var customerAccess = new CustomerAccess("teste@teste.com", "senha123");
+            var customer = new Customer("Test", DateOnly.MinValue, "1234", customerAccess);
+            var oldAddress = new DeliveryAddress("123", "Rua Test", 123, "bloco 8", "Vila Test", "Test City", "SP");
+            var newAddress = new DeliveryAddress(oldAddress.ZipCode, oldAddress.Address, 55, "bloco 9", oldAddress.Neighborhood, oldAddress.City, oldAddress.State);
+            
+            customer.AddAddress(oldAddress);
+            customer.UpdateAddress(newAddress);
+
+            Assert.IsTrue(customer.DeliveryAddress.Contains(newAddress));
+            Assert.IsFalse(customer.DeliveryAddress.Contains(oldAddress));
+        }
+
+        [Test]
+        public void Add_NewCustomer_MustHaveCredentialAccess()
+        {
+            var customerAccess = new CustomerAccess("teste@teste.com", "senha123");
+            var customer = new Customer("Test", DateOnly.MinValue, "1234", customerAccess);
+
+            Assert.IsNotNull(customer.CustomerAccess);
+        }
     }        
 }
