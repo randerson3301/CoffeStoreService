@@ -1,21 +1,19 @@
 ﻿using CoffeStoreService.API.Resources;
-using System.Collections.ObjectModel;
 
 namespace CoffeStoreService.API.Models.CustomerAggregate
 {
-    public class Customer
+    public sealed class Customer
     {
-        private readonly Guid _id; 
-        public Guid Id => _id;
+        private readonly Guid _id;
+        private readonly List<DeliveryAddress> _deliveryAddresses;
 
+        public Guid Id => _id;
         public string FullName { get; }
         public DateOnly BirthDate { get; }
         public string Document { get; }
-        public ReadOnlyCollection<DeliveryAddress> DeliveryAddress => _deliveryAddresses.AsReadOnly();
-
+        public IReadOnlyCollection<DeliveryAddress> DeliveryAddress => _deliveryAddresses.AsReadOnly();
         public CustomerAccess CustomerAccess { get; set; }
 
-        private readonly List<DeliveryAddress> _deliveryAddresses;
 
         public Customer(string fullName, DateOnly birthDate, string document, CustomerAccess customerAccess)
         {
@@ -47,7 +45,7 @@ namespace CoffeStoreService.API.Models.CustomerAggregate
         {
             var existingAddress = _deliveryAddresses.Find(a => a.ZipCode == newAddress.ZipCode);
 
-            if(existingAddress != null)
+            if(!existingAddress.Equals(null))
             {
                 AddAddress(newAddress);
                 RemoveAddress(existingAddress);

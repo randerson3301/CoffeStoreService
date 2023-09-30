@@ -1,6 +1,6 @@
 ﻿namespace CoffeStoreService.API.Models.CustomerAggregate
 {
-    public class DeliveryAddress
+    public struct DeliveryAddress
     {
         public DeliveryAddress(string zipCode, string address, int number, string? complement, string neighborhood, string city, string state)
         {

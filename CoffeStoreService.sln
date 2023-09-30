@@ -5,7 +5,12 @@ VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeStoreService.API", "CoffeStoreService.API\CoffeStoreService.API.csproj", "{E6E61BBD-AEE3-4F78-9E09-4E5695F9F34B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeStoreService.Tests", "CoffeStoreService.Tests\CoffeStoreService.Tests.csproj", "{6D961198-95BF-4840-A1B1-9D544CC37168}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeStoreService.Tests", "CoffeStoreService.Tests\CoffeStoreService.Tests.csproj", "{6D961198-95BF-4840-A1B1-9D544CC37168}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0AD4E664-3B70-455D-A1C8-8A040127B242}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
