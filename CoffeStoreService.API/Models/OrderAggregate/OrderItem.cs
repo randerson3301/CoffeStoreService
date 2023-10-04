@@ -16,5 +16,10 @@
         {
             Quantity++;
         }
+
+        public void DecreaseQuantity()
+        {
+            Quantity--;
+        }
     }
 }
