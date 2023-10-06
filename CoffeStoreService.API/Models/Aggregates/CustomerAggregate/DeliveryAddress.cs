@@ -1,4 +1,4 @@
-﻿namespace CoffeStoreService.API.Models.CustomerAggregate
+﻿namespace CoffeStoreService.API.Models.Aggregates.CustomerAggregate
 {
     public struct DeliveryAddress
     {

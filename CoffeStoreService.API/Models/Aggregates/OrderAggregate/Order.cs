@@ -1,8 +1,6 @@
-﻿using CoffeStoreService.API.Models.CustomerAggregate;
-using CoffeStoreService.API.Models.Enums;
-using System.Collections.ObjectModel;
+﻿using CoffeStoreService.API.Models.Enums;
 
-namespace CoffeStoreService.API.Models.OrderAggregate
+namespace CoffeStoreService.API.Models.Aggregates.OrderAggregate
 {
     public sealed class Order
     {

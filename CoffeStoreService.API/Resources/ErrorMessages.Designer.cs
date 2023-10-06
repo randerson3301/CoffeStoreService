@@ -68,5 +68,14 @@ namespace CoffeStoreService.API.Resources {
                 return ResourceManager.GetString("CANNOT_REMOVE_ADDRESS", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot review an unavailable product!.
+        /// </summary>
+        public static string CANNOT_REVIEW_UNAVAILABLE_PRODUCT {
+            get {
+                return ResourceManager.GetString("CANNOT_REVIEW_UNAVAILABLE_PRODUCT", resourceCulture);
+            }
+        }
     }
 }

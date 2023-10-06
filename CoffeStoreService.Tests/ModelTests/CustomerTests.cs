@@ -1,4 +1,7 @@
-﻿namespace CoffeStoreService.Tests.ModelTests
+﻿using CoffeStoreService.API.Models.Aggregates.CustomerAggregate;
+using CoffeStoreService.API.Models.DomainExceptions;
+
+namespace CoffeStoreService.Tests.ModelTests
 {
     internal class CustomerTests
     {
@@ -45,7 +48,7 @@
 
             customer.AddAddress(addressToRemove);
 
-            string? actualExceptionMessage = Assert.Throws<Exception>(() =>
+            string? actualExceptionMessage = Assert.Throws<RemoveUniqueAddressException>(() =>
             {
                 customer.RemoveAddress(addressToRemove);
             }).Message;
@@ -79,11 +82,11 @@
         }
 
         [Test]
-        public void Deactivate_CustomerAccess_ReturnsFalseForActivation()
+        public void Disable_CustomerAccess_ReturnsFalseForActivation()
         {
             var customer = CustomerMock.GetCustomer();
 
-            customer.CustomerAccess.DeactivateAccess();
+            customer.CustomerAccess.DisableAccess();
 
             Assert.IsFalse(customer.CustomerAccess.IsActive);
         }

@@ -1,5 +1,5 @@
 ﻿using CoffeStoreService.API.Models.Enums;
-using CoffeStoreService.API.Models.OrderAggregate;
+using CoffeStoreService.API.Models.Aggregates.OrderAggregate;
 
 namespace CoffeStoreService.Tests.ModelTests
 {

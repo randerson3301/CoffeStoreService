@@ -1,6 +1,6 @@
-﻿using CoffeStoreService.API.Resources;
+﻿using CoffeStoreService.API.Models.DomainExceptions;
 
-namespace CoffeStoreService.API.Models.CustomerAggregate
+namespace CoffeStoreService.API.Models.Aggregates.CustomerAggregate
 {
     public sealed class Customer
     {
@@ -35,7 +35,7 @@ namespace CoffeStoreService.API.Models.CustomerAggregate
         {            
             if (_deliveryAddresses.HasSingleElement())
             {
-                throw new Exception(ErrorMessages.CANNOT_REMOVE_ADDRESS);
+                throw new RemoveUniqueAddressException();
             }
 
             _deliveryAddresses.Remove(addressToRemove);

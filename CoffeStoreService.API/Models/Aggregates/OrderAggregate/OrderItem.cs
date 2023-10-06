@@ -1,4 +1,4 @@
-﻿namespace CoffeStoreService.API.Models.OrderAggregate
+﻿namespace CoffeStoreService.API.Models.Aggregates.OrderAggregate
 {
     public struct OrderItem
     {

@@ -1,6 +1,6 @@
-﻿using CoffeStoreService.API.Models.CustomerAggregate;
+﻿using CoffeStoreService.API.Models.Aggregates.CustomerAggregate;
 
-namespace CoffeStoreService.API.Models.OrderAggregate
+namespace CoffeStoreService.API.Models.Aggregates.OrderAggregate
 {
     public readonly struct CustomerAddress
     {       

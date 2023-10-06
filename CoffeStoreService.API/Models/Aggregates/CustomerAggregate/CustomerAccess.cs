@@ -1,4 +1,4 @@
-﻿namespace CoffeStoreService.API.Models.CustomerAggregate
+﻿namespace CoffeStoreService.API.Models.Aggregates.CustomerAggregate
 {
     public sealed class CustomerAccess
     {
@@ -15,7 +15,7 @@
             _isActive = true;
         }
 
-        public void DeactivateAccess() => _isActive = false;
+        public void DisableAccess() => _isActive = false;
         
     }
 }

@@ -120,4 +120,7 @@
   <data name="CANNOT_REMOVE_ADDRESS" xml:space="preserve">
     <value>Could not remove the address since customer should have at least one delivery address</value>
   </data>
+  <data name="CANNOT_REVIEW_UNAVAILABLE_PRODUCT" xml:space="preserve">
+    <value>Cannot review an unavailable product!</value>
+  </data>
 </root>
