@@ -77,5 +77,14 @@ namespace CoffeStoreService.API.Resources {
                 return ResourceManager.GetString("CANNOT_REVIEW_UNAVAILABLE_PRODUCT", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Its necessary to be an admin to conclude the operation.
+        /// </summary>
+        public static string NOT_ADMIN_MESSAGE {
+            get {
+                return ResourceManager.GetString("NOT_ADMIN_MESSAGE", resourceCulture);
+            }
+        }
     }
 }

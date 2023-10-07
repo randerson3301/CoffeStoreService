@@ -14,18 +14,18 @@ namespace CoffeStoreService.API.Models.Aggregates.ProductAggregate
         public string Description { get; }
 
         public bool IsAvailable { get; private set; }
-        public Guid SalesmanId {get;}
+        public Guid AddedBy {get;}
         public double AverageRate => _productReviews.Average(r => r.RateNumber);
         public IReadOnlyCollection<ProductReview> ProductReviews => _productReviews.AsReadOnly();
 
-        public Product(string productName, string imagePath, decimal price, string description, Guid salesmanId)
+        public Product(string productName, string imagePath, decimal price, string description, Guid addedBy)
         {
             ProductName = productName;
             ImagePath = imagePath;
             Price = price;
             Description = description;
             IsAvailable = true;
-            SalesmanId = salesmanId;
+            AddedBy = addedBy;
 
             _productReviews = new List<ProductReview>();
             _id = Guid.NewGuid();

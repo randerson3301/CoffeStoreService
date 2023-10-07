@@ -123,4 +123,7 @@
   <data name="CANNOT_REVIEW_UNAVAILABLE_PRODUCT" xml:space="preserve">
     <value>Cannot review an unavailable product!</value>
   </data>
+  <data name="NOT_ADMIN_MESSAGE" xml:space="preserve">
+    <value>Its necessary to be an admin to conclude the operation</value>
+  </data>
 </root>
