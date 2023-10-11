@@ -143,5 +143,22 @@ namespace CoffeStoreService.Tests.ModelTests
 
             Assert.AreEqual(DeliveryStatusEnum.New, order.DeliveryStatus);
         }
+
+        [TestCase(DeliveryStatusEnum.InTransit)]
+        [TestCase(DeliveryStatusEnum.Delivered)]
+        [TestCase(DeliveryStatusEnum.Canceled)]
+        public void ChangeDeliveryStatus_ModifiesDeliveryStatus(DeliveryStatusEnum newStatus)
+        {
+            var customer = CustomerMock.GetCustomer();
+            var deliveryAddress = customer.DeliveryAddress.FirstOrDefault();
+
+            var customerAddress = new CustomerAddress(customer.Id, deliveryAddress);
+
+            var order = new Order(customerAddress);
+
+            order.ChangeDeliveryStatus(newStatus); 
+
+            Assert.AreEqual(newStatus, order.DeliveryStatus);
+        }
     }
 }

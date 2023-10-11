@@ -56,18 +56,23 @@ namespace CoffeStoreService.API.Models.Aggregates.EmployeeAggregate
         }
         
 
-        public Employee DisableEmployee(Employee employeeToBeDisabled)
+        public Employee? DisableEmployee(Employee employeeToBeDisabled)
         {
             if (Profile != ProfileEnum.Admin)
             {
                 throw new NotAdminException();
             }
 
-            employeeToBeDisabled.IsEnabled = false;
+            if (_employees.Contains(employeeToBeDisabled))
+            {
+                employeeToBeDisabled.IsEnabled = false;
 
-            _employees.Remove(employeeToBeDisabled);
+                _employees.Remove(employeeToBeDisabled); 
 
-            return employeeToBeDisabled;
+                return employeeToBeDisabled;
+            }
+
+            return null;
         }
 
         public void RemoveShopAddress(ShopAddress shopAddress)

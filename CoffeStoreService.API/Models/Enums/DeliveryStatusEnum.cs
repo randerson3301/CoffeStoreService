@@ -3,5 +3,8 @@
     public enum DeliveryStatusEnum
     {
         New,
+        InTransit,
+        Delivered,
+        Canceled,
     }
 }

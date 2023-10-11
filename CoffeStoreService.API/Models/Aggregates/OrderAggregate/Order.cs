@@ -11,7 +11,7 @@ namespace CoffeStoreService.API.Models.Aggregates.OrderAggregate
         public CustomerAddress CustomerAddress;
         public IReadOnlyCollection<OrderItem> OrderItems => _orderItems.AsReadOnly();
         public decimal Amount => _orderItems.Sum(item => item.Subtotal);
-        public DeliveryStatusEnum DeliveryStatus { get; }
+        public DeliveryStatusEnum DeliveryStatus { get; private set; } 
 
         public Order(CustomerAddress customerAddress)
         {
@@ -29,6 +29,11 @@ namespace CoffeStoreService.API.Models.Aggregates.OrderAggregate
         public void RemoveOrderItem(OrderItem orderItem)
         {
             _orderItems.Remove(orderItem);
+        }
+
+        public void ChangeDeliveryStatus(DeliveryStatusEnum newStatus)
+        {
+            DeliveryStatus = newStatus;
         }
     }
 }
