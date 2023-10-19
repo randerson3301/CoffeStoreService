@@ -3,14 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeStoreService.API", "CoffeStoreService.API\CoffeStoreService.API.csproj", "{E6E61BBD-AEE3-4F78-9E09-4E5695F9F34B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeStoreService.Tests", "CoffeStoreService.Tests\CoffeStoreService.Tests.csproj", "{6D961198-95BF-4840-A1B1-9D544CC37168}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeStore.Tests", "CoffeStoreService.Tests\CoffeStore.Tests.csproj", "{6D961198-95BF-4840-A1B1-9D544CC37168}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0AD4E664-3B70-455D-A1C8-8A040127B242}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeStore.Models", "CoffeStore.Models\CoffeStore.Models.csproj", "{BD06C3BD-A017-4CB3-9DAF-F14224A4D42D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeStore.EcommerceApp", "CoffeStore.EcommerceApp\CoffeStore.EcommerceApp.csproj", "{FADAFE33-FC12-492E-BB37-CF252420EF6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,14 +20,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E6E61BBD-AEE3-4F78-9E09-4E5695F9F34B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E6E61BBD-AEE3-4F78-9E09-4E5695F9F34B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E6E61BBD-AEE3-4F78-9E09-4E5695F9F34B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E6E61BBD-AEE3-4F78-9E09-4E5695F9F34B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6D961198-95BF-4840-A1B1-9D544CC37168}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6D961198-95BF-4840-A1B1-9D544CC37168}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D961198-95BF-4840-A1B1-9D544CC37168}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D961198-95BF-4840-A1B1-9D544CC37168}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD06C3BD-A017-4CB3-9DAF-F14224A4D42D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD06C3BD-A017-4CB3-9DAF-F14224A4D42D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD06C3BD-A017-4CB3-9DAF-F14224A4D42D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD06C3BD-A017-4CB3-9DAF-F14224A4D42D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FADAFE33-FC12-492E-BB37-CF252420EF6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FADAFE33-FC12-492E-BB37-CF252420EF6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FADAFE33-FC12-492E-BB37-CF252420EF6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FADAFE33-FC12-492E-BB37-CF252420EF6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

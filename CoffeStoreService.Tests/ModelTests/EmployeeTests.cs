@@ -1,8 +1,4 @@
-﻿using CoffeStoreService.API.Models.Aggregates.EmployeeAggregate;
-using CoffeStoreService.API.Models.DomainExceptions;
-using CoffeStoreService.API.Models.Enums;
-
-namespace CoffeStoreService.Tests.ModelTests
+﻿namespace CoffeStoreService.Tests.ModelTests
 {
     internal class EmployeeTests
     {
@@ -67,7 +63,7 @@ namespace CoffeStoreService.Tests.ModelTests
             admin.AddEmployee(salesman);
             var disabledSubordinate = admin.DisableEmployee(salesman);
 
-            Assert.IsFalse(disabledSubordinate.IsEnabled);
+            Assert.IsFalse(disabledSubordinate?.IsEnabled);
             Assert.IsFalse(admin.Subordinates.Contains(salesman));
         }
 

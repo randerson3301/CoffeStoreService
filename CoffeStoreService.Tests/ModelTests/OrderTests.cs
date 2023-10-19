@@ -1,7 +1,4 @@
-﻿using CoffeStoreService.API.Models.Enums;
-using CoffeStoreService.API.Models.Aggregates.OrderAggregate;
-
-namespace CoffeStoreService.Tests.ModelTests
+﻿namespace CoffeStoreService.Tests.ModelTests
 {
     internal class OrderTests
     {

@@ -1,6 +1,4 @@
-﻿using CoffeStoreService.API.Models.Aggregates.CustomerAggregate;
-using CoffeStoreService.API.Models.DomainExceptions;
-
+﻿
 namespace CoffeStoreService.Tests.ModelTests
 {
     internal class CustomerTests
