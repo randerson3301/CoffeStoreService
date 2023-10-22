@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ADD_CUSTOMER_FAILED" xml:space="preserve">
+    <value>Adding customer has failed</value>
+  </data>
   <data name="CANNOT_REMOVE_ADDRESS" xml:space="preserve">
     <value>Could not remove the address since customer should have at least one delivery address</value>
   </data>
@@ -125,5 +128,8 @@
   </data>
   <data name="NOT_ADMIN_MESSAGE" xml:space="preserve">
     <value>Its necessary to be an admin to conclude the operation</value>
+  </data>
+  <data name="UPDATE_CUSTOMER_FAILED" xml:space="preserve">
+    <value>Updating customer has failed</value>
   </data>
 </root>

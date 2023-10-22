@@ -61,6 +61,15 @@ namespace CoffeStore.Models.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Adding customer has failed.
+        /// </summary>
+        public static string ADD_CUSTOMER_FAILED {
+            get {
+                return ResourceManager.GetString("ADD_CUSTOMER_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not remove the address since customer should have at least one delivery address.
         /// </summary>
         public static string CANNOT_REMOVE_ADDRESS {
@@ -84,6 +93,15 @@ namespace CoffeStore.Models.Resources {
         public static string NOT_ADMIN_MESSAGE {
             get {
                 return ResourceManager.GetString("NOT_ADMIN_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updating customer has failed.
+        /// </summary>
+        public static string UPDATE_CUSTOMER_FAILED {
+            get {
+                return ResourceManager.GetString("UPDATE_CUSTOMER_FAILED", resourceCulture);
             }
         }
     }
