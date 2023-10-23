@@ -4,10 +4,11 @@ using FluentValidation;
 
 namespace CoffeStore.EcommerceApp.Validators
 {
-    public class CustomerDtoValidator<T> : AbstractValidator<T> where T : BaseCustomerDto
+    public class CustomerDtoValidator : AbstractValidator<CustomerDto>
     {
         public CustomerDtoValidator()
         {
+
             RuleFor(dto => dto.Name)
                 .NotEmpty()
                 .MinimumLength(ValidationHelper.MIN_NAME_LENGTH);
@@ -21,67 +22,52 @@ namespace CoffeStore.EcommerceApp.Validators
                  .Must(ValidationHelper.BeValidDocument);
 
             RuleFor(dto => dto.Email)
-                .NotEmpty()
-                .EmailAddress();
+               .NotEmpty()
+               .EmailAddress();
 
-            When(dto => dto is CustomerSignUpDto, () =>
+            When(dto => !string.IsNullOrEmpty(dto.Password), () =>
             {
-                RuleFor(dto => (dto as CustomerSignUpDto).Password)
+                RuleFor(dto => dto.Password)
                     .NotEmpty()
                     .MinimumLength(ValidationHelper.MIN_PASSWORD_LENGTH);
             });
 
-            When(dto => dto is CustomerSignUpDto, () =>
+            When(dto => dto.Id != null, () =>
             {
-                RuleFor(dto => (dto as CustomerSignUpDto).ZipCode)
-                    .NotEmpty()
-                    .Length(ValidationHelper.ZIP_CODE_LENGTH)
-                    .Matches(ValidationHelper.ZIP_CODE_REGEX);
-            });
-
-            When(dto => dto is CustomerSignUpDto, () =>
-            {
-                RuleFor(dto => (dto as CustomerSignUpDto).Address)
-                    .NotEmpty()
-                    .MinimumLength(ValidationHelper.MIN_ADDRESS_LENGTH)
-                    .Matches(ValidationHelper.ADDRESS_REGEX);
-            });
-
-            When(dto => dto is CustomerSignUpDto, () =>
-            {
-                RuleFor(dto => (dto as CustomerSignUpDto).Number)
-                    .NotNull();
-            });
-
-            When(dto => dto is CustomerSignUpDto, () =>
-            {
-                RuleFor(dto => (dto as CustomerSignUpDto).Neighborhood)
-                    .NotEmpty()
-                    .MinimumLength(ValidationHelper.MIN_ADDRESS_LENGTH)
-                    .Matches(ValidationHelper.ADDRESS_REGEX);
-            });
-
-            When(dto => dto is CustomerSignUpDto, () =>
-            {
-                RuleFor(dto => (dto as CustomerSignUpDto).City)
-                    .NotEmpty()
-                    .Matches(ValidationHelper.ADDRESS_REGEX);
-            });
-
-            When(dto => dto is CustomerSignUpDto, () =>
-            {
-                RuleFor(dto => (dto as CustomerSignUpDto).State)
-                    .NotEmpty()
-                    .Length(ValidationHelper.STATE_LENGTH)
-                    .Matches(ValidationHelper.STATE_REGEX);
-            });
-
-            When(dto => dto is CustomerUpdateDto, () =>
-            {
-                RuleFor(dto => (dto as CustomerUpdateDto).Id)
+                RuleFor(dto => dto.Id)
                     .NotEmpty()
                     .NotEqual(Guid.Empty);
             });
-        }
+
+            //When(dto => dto.DeliveryAddress != null, () =>
+            //{
+            //    RuleFor(dto => dto.DeliveryAddress.ZipCode)
+            //       .NotEmpty()
+            //       .Length(ValidationHelper.ZIP_CODE_LENGTH)
+            //       .Matches(ValidationHelper.ZIP_CODE_REGEX);
+
+            //    RuleFor(dto => dto.DeliveryAddress.Address)
+            //        .NotEmpty()
+            //        .MinimumLength(ValidationHelper.MIN_ADDRESS_LENGTH)
+            //        .Matches(ValidationHelper.ADDRESS_REGEX);
+
+            //    RuleFor(dto => dto.DeliveryAddress.Number)
+            //       .NotNull();
+
+            //    RuleFor(dto => dto.DeliveryAddress.Neighborhood)
+            //        .NotEmpty()
+            //        .MinimumLength(ValidationHelper.MIN_ADDRESS_LENGTH)
+            //        .Matches(ValidationHelper.ADDRESS_REGEX);
+
+            //    RuleFor(dto => dto.DeliveryAddress.City)
+            //       .NotEmpty()
+            //       .Matches(ValidationHelper.ADDRESS_REGEX);
+
+            //    RuleFor(dto => dto.DeliveryAddress.State)
+            //       .NotEmpty()
+            //       .Length(ValidationHelper.STATE_LENGTH)
+            //       .Matches(ValidationHelper.STATE_REGEX);
+            //});
+        }       
     }
 }

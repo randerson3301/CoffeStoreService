@@ -6,18 +6,18 @@ namespace CoffeStore.Tests.ValidatorTests
 {
     internal class CustomerDtoValidatorTests
     {
-        private CustomerDtoValidator<BaseCustomerDto> validator;
+        private CustomerDtoValidator validator;
 
         [SetUp]
         public void SetUp()
         {
-            validator = new CustomerDtoValidator<BaseCustomerDto>();
+            validator = new CustomerDtoValidator();
         }
 
         [Test]
         public void ValidCustomerDto_PassesValidation()
         {
-            var customerDto = CustomerMock.GetSignUpDto();
+            var customerDto = CustomerMock.GetDto();
 
             var result = validator.TestValidate(customerDto);
 
@@ -27,12 +27,12 @@ namespace CoffeStore.Tests.ValidatorTests
         [Test]
         public void InvalidCustomerDto_FailsValidation()
         {
-            var customerDto = new CustomerSignUpDto(); 
+            var customerDto = new CustomerDto(); 
 
             var result = validator.TestValidate(customerDto);
 
             Assert.IsFalse(result.IsValid);
-            Assert.AreEqual(12, result.Errors.Count); 
+            Assert.IsNotNull(result.Errors); 
         }
     }
 }

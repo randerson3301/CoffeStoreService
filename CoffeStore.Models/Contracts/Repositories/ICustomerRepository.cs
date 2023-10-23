@@ -4,7 +4,8 @@ namespace CoffeStore.Models.Contracts.Repositories
 {
     public interface ICustomerRepository
     {
-        Task<Customer> Add(Customer customer);
-        Task Update(Customer customer);
+        Task<Customer> AddAsync(Customer customer);
+        Task<Customer> GetByIdAsync(Guid? id);
+        Task UpdateAsync(Customer customer);
     }
 }

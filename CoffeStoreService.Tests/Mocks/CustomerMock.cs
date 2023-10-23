@@ -23,34 +23,43 @@ namespace CoffeStoreService.Tests.Mocks
         }
 
 
-        public static CustomerSignUpDto GetSignUpDto()
+        public static CustomerDto GetDto()
         {
-            return new CustomerSignUpDto()
+            return new CustomerDto()
+            {
+                Name = "John Doe",
+                BirthDate = new DateOnly(2000, 1, 1),
+                Document = "70152246070",
+                Email = "john.doe@example.com",
+                Password = "Password123",               
+                Id = Guid.NewGuid(),
+            };
+        }
+
+        public static CustomerDto GetDtoWithAddress()
+        {
+            return new CustomerDto()
             {
                 Name = "John Doe",
                 BirthDate = new DateOnly(2000, 1, 1),
                 Document = "70152246070",
                 Email = "john.doe@example.com",
                 Password = "Password123",
-                ZipCode = "12345678",
-                Address = "123 Main St",
-                Number = 123,
-                Neighborhood = "Suburb",
-                City = "City",
-                State = "ST"
+                DeliveryAddress = new CustomerAddressDto
+                {
+                    ZipCode = "12345678",
+                    Address = "123 Main St",
+                    Number = 123,
+                    Neighborhood = "Suburb",
+                    City = "City",
+                    State = "ST",
+                },
+                Id = Guid.NewGuid(),
             };
         }
 
-        public static CustomerUpdateDto GetUpdateDto(Guid id)
-        {
-            return new CustomerUpdateDto()
-            {
-                Id = id,
-                Name = "John Samuelson",
-                BirthDate = new DateOnly(2000, 1, 1),
-                Document = "70152246070",
-                Email = "john.doe@example.com"                
-            };
+        public static DeliveryAddress GetCustomerAddress() {
+            return new DeliveryAddress("12345678", "123 Main St", 123, "", "Suburb", "City", "ST");            
         }
     }
 }

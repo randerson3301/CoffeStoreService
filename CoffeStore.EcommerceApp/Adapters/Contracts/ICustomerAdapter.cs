@@ -6,7 +6,9 @@ namespace CoffeStore.EcommerceApp.Adapters
 {
     public interface ICustomerAdapter
     {
-        Customer ConvertToDomain(BaseCustomerDto customerDto);
+        Customer ConvertToDomain(CustomerDto customerDto);
+        Customer ConvertToDomain(CustomerDto customerDto, Customer domain);
+        DeliveryAddress ConvertToDomainAddress(CustomerAddressDto deliveryAddress);
         CustomerViewModel ConvertToViewModel(Customer customerDto);
     }
 }
