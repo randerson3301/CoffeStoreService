@@ -362,3 +362,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /CoffeStore.EcommerceApp/ClientApp/.angular/cache/14.0.3
+/CoffeStore.EcommerceApp/ClientApp/.angular/cache/14.2.13

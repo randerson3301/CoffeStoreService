@@ -1,0 +1,21 @@
+<div class="card" style="height: 400px;">
+  <div class="row no-gutters">
+    <div class="col-md-4" style="height: 400px;">
+      <div class="card-img" style="height: 100%;background: url({{product.imagePath}}) center / cover no-repeat;">
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body" style="height: 400px;">
+        <h4 style="margin-bottom: 0px;">{{product.title}}</h4>
+        <ngb-rating class="fs-1" [(rate)]="product.rateNumber" [readonly]="true" [max]="5"></ngb-rating>        
+        <h5 class="fs-2">{{product.price | currency:'BRL' : true}}</h5>
+        <h5 class="text-muted mb-2" style="margin-bottom: 1px;padding-bottom: 0px;padding-top: 0px;margin-top: 21px;">Descrição</h5>
+        <p>{{product.description}}</p>
+        <button class="btn btn-primary d-block d-xl-flex justify-content-xl-center align-items-xl-center icon-button w-100 coffe-button" type="button">          
+          <fa-icon [icon]="faCartPlus"></fa-icon>
+          <span>ADICIONAR AO CARRINHO</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

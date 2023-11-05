@@ -1,6 +1,15 @@
 <body>
   <app-nav-menu></app-nav-menu>
   <div class="container">
-    <router-outlet></router-outlet>
+    <div class="row" style="height: auto">
+      <div class="col col-2">     
+        <app-catalog-sidebar></app-catalog-sidebar>   
+      </div>
+      <div class="col col-8 default-container">
+        <router-outlet></router-outlet>
+      </div>
+      <div class="col col-2"></div>
+    </div>
   </div>
+  <app-footer></app-footer>
 </body>

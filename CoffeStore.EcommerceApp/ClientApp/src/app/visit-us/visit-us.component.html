@@ -1,0 +1,20 @@
+<h1>nossos endereços</h1>
+<div class="card" *ngFor="let shop of shops">
+  <div class="row no-gutters">
+    <div class="col-md-8">
+      <div class="card-body">
+        <h4>{{shop.name}}</h4>
+        <p>
+          <br />
+          <span style="color: rgb(17, 17, 17)">{{shop.fullAddress}}</span>
+        </p>
+      </div>
+    </div>
+    <div
+      class="col text-center d-xl-flex justify-content-xl-center align-items-xl-center">
+      <a href="https://www.google.com/maps/search/{{shop.fullAddress}}" target="_blank">
+        <button class="btn btn-primary" type="button">VER DETALHES</button>
+      </a>     
+    </div>
+  </div>
+</div>
