@@ -104,10 +104,25 @@
             <span style="font-weight: normal !important; color: rgb(255, 255, 255)">ENTRAR</span>
           </a>
 
-          <a class="nav-link" [routerLink]="['/my-account']" *ngIf="logged">
-            <fa-icon class="fs-4 text-light" [icon]="faUserCircle"></fa-icon>
-          </a>
 
+          <div ngbDropdown class="d-inline-block" *ngIf="logged">
+            <button class="btn btn-link text-light" id="dropdownIcon" ngbDropdownToggle>
+              <fa-icon class="fs-4 text-light" [icon]="faUserCircle"></fa-icon>
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownIcon">
+              <a ngbDropdownItem  class="nav-link" [routerLink]="['/my-account']">
+                <h6>Minha conta</h6>                
+              </a>              
+              <a ngbDropdownItem class="nav-link" [routerLink]="['/my-orders']">
+                <h6>Meus pedidos</h6>                                
+              </a>   
+            </div>
+          </div>
+
+
+          <!-- <a class="nav-link" [routerLink]="['/my-account']" *ngIf="logged">
+            <fa-icon class="fs-4 text-light" [icon]="faUserCircle"></fa-icon>
+          </a> -->
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/register']" *ngIf="!logged">

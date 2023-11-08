@@ -23,6 +23,10 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { FormUserDataComponent } from './shared/form-user-data/form-user-data.component';
 import { FormUserPasswordComponent } from './shared/form-user-password/form-user-password.component';
 import { FormUserAddressComponent } from './shared/form-user-address/form-user-address.component';
+import { NewAddressComponent } from './new-address/new-address.component';
+import { EditAccountComponent } from './edit-account/edit-account.component';
+import { EditPasswordComponent } from './edit-password/edit-password.component';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
 
 
 @NgModule({
@@ -45,6 +49,10 @@ import { FormUserAddressComponent } from './shared/form-user-address/form-user-a
     FormUserDataComponent,
     FormUserPasswordComponent,
     FormUserAddressComponent,
+    NewAddressComponent,
+    EditAccountComponent,
+    EditPasswordComponent,
+    MyOrdersComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -63,6 +71,10 @@ import { FormUserAddressComponent } from './shared/form-user-address/form-user-a
       { path: 'register', component: RegisterComponent },
       { path: 'my-account', component: MyAccountComponent },
       { path: 'shopping-cart', component: ShoppingCartComponent },
+      { path: 'new-address', component: NewAddressComponent },
+      { path: 'edit-account', component: EditAccountComponent },
+      { path: 'edit-password', component: EditPasswordComponent },
+      { path: 'my-orders', component: MyOrdersComponent },
     ]),
     NgbModule,
   ],

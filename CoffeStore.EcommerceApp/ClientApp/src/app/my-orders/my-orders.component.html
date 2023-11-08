@@ -1,0 +1,19 @@
+<h1>Meus pedidos</h1>
+<table class="table">
+    <thead>
+      <tr>
+        <th>Itens do Pedido</th>
+        <th>Total</th>
+        <th>Data de realização</th>
+        <th>Avaliação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of myOrders">
+        <td>{{ order.items }}</td>
+        <td>{{ order.total }}</td>
+        <td>{{ order.orderedIn }}</td>
+        <td><ngb-rating class="fs-3" [max]="5"></ngb-rating></td>
+      </tr>
+    </tbody>
+  </table>
