@@ -1,46 +1,4 @@
-<header>
-  <!--<nav
-    class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
-  >
-    <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']">CoffeStore.EcommerceApp</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target=".navbar-collapse"
-        aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded"
-        (click)="toggle()"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div
-        class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
-        [ngClass]="{ show: isExpanded }"
-      >
-        <ul class="navbar-nav flex-grow">
-          <li
-            class="nav-item"
-            [routerLinkActive]="['link-active']"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/counter']"
-              >Counter</a
-            >
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/fetch-data']"
-              >Fetch data</a
-            >
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>-->
+<header>  
   <nav
     class="navbar navbar-expand-md bg-body py-3 nav-coffestore"
     style="margin-bottom: 0px; padding-bottom: 0px"
@@ -84,7 +42,7 @@
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link" [routerLink]="['/visit-us']"
-              ><span style="color: rgb(255, 255, 255)">vISITE-NOS</span></a
+              ><span style="color: rgb(255, 255, 255)">VISITE-NOS</span></a
             >
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
@@ -117,12 +75,7 @@
                 <h6>Meus pedidos</h6>                                
               </a>   
             </div>
-          </div>
-
-
-          <!-- <a class="nav-link" [routerLink]="['/my-account']" *ngIf="logged">
-            <fa-icon class="fs-4 text-light" [icon]="faUserCircle"></fa-icon>
-          </a> -->
+          </div>         
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/register']" *ngIf="!logged">

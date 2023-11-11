@@ -12,7 +12,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeStore.Models", "CoffeStore.Models\CoffeStore.Models.csproj", "{BD06C3BD-A017-4CB3-9DAF-F14224A4D42D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeStore.EcommerceApp", "CoffeStore.EcommerceApp\CoffeStore.EcommerceApp.csproj", "{FADAFE33-FC12-492E-BB37-CF252420EF6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeStore.EcommerceApp", "CoffeStore.EcommerceApp\CoffeStore.EcommerceApp.csproj", "{FADAFE33-FC12-492E-BB37-CF252420EF6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeStore.Infra", "CoffeStore.Infra\CoffeStore.Infra.csproj", "{71965C2D-B9E3-49B0-828B-8763A195AAEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +34,10 @@ Global
 		{FADAFE33-FC12-492E-BB37-CF252420EF6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FADAFE33-FC12-492E-BB37-CF252420EF6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FADAFE33-FC12-492E-BB37-CF252420EF6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71965C2D-B9E3-49B0-828B-8763A195AAEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71965C2D-B9E3-49B0-828B-8763A195AAEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71965C2D-B9E3-49B0-828B-8763A195AAEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71965C2D-B9E3-49B0-828B-8763A195AAEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

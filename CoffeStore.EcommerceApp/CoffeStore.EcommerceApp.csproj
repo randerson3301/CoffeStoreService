@@ -8,6 +8,7 @@
     <SpaProxyServerUrl>https://localhost:44464</SpaProxyServerUrl>
     <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
     <ImplicitUsings>enable</ImplicitUsings>
+	<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
   </PropertyGroup>
 
   <ItemGroup>
@@ -36,6 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CoffeStore.Infra\CoffeStore.Infra.csproj" />
     <ProjectReference Include="..\CoffeStore.Models\CoffeStore.Models.csproj" />
   </ItemGroup>
 
