@@ -1,29 +1,29 @@
-<div class="form-group mb-3">
+<div class="form-group mb-3" [formGroup]="userForm">
     <div class="row">
         <div class="col col-4">
-            <p>CEP</p><input class="form-control" type="text" required="" name="zipCode" placeholder="Ex. 700001">
+            <p>CEP</p><input class="form-control" #zipCodeSearch (focusout)="getAddressByZipCode(zipCodeSearch.value)" type="text" formControlName="zipCode" placeholder="Ex. 00000-000" mask="00000-000">
         </div>
         <div class="col col-8">
-            <p>Logradouro</p><input class="form-control" type="text" required="" name="street" disabled="">
+            <p>Logradouro</p><input class="form-control" [(ngModel)]="street" type="text" required="" formControlName="address">
         </div>
     </div>
     <div class="row" style="margin-top: 10px;">
         <div class="col col-4">
-            <p>Número</p><input class="form-control" type="number" required="" name="addressNumber" placeholder="Ex. 99">
+            <p>Número</p><input class="form-control" type="number" required="" formControlName="number" placeholder="Ex. 99">
         </div>
         <div class="col col-8">
-            <p>Complemento</p><input class="form-control" type="text" required="" name="complement">
+            <p>Complemento</p><input class="form-control" type="text" formControlName="complement">
         </div>
     </div>
     <div class="row" style="margin-top: 10px;">
-        <div class="col col-5">
-            <p>Bairro</p><input class="form-control" type="text" required="" name="neighbourhood" disabled="">
+        <div class="col col-4">
+            <p>Bairro</p><input class="form-control" [(ngModel)]="neighborhood" type="text" required="" formControlName="neighbourhood" [attr.disabled]="true">
         </div>
         <div class="col col-6">
-            <p>Cidade</p><input class="form-control" type="text" required="" name="city" disabled="">
+            <p>Cidade</p><input class="form-control" [(ngModel)]="city" type="text" required="" formControlName="city" [attr.disabled]="true">
         </div>
-        <div class="col col-1">
-            <p>UF</p><input class="form-control" type="text" required="" name="state" disabled="">
+        <div class="col col-2">
+            <p>UF</p><input class="form-control" [(ngModel)]="state" type="text" required="" formControlName="state" [attr.disabled]="true">
         </div>
     </div>
 </div>

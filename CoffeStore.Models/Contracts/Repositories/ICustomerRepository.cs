@@ -4,8 +4,10 @@ namespace CoffeStore.Models.Contracts.Repositories
 {
     public interface ICustomerRepository
     {
-        Task<Customer> AddAsync(Customer customer);
-        Task<Customer> GetByIdAsync(Guid? id);
+        Task AddAsync(Customer customer);
+        Task<Customer> GetByEmail(string email);
+        Task<Customer> GetByIdAsync(string id);
+        Task<bool> IsCustomerRegistered(string email, string? password);
         Task UpdateAsync(Customer customer);
     }
 }

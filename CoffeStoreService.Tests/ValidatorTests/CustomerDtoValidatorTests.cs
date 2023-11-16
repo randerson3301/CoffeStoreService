@@ -27,7 +27,7 @@ namespace CoffeStore.Tests.ValidatorTests
         [Test]
         public void InvalidCustomerDto_FailsValidation()
         {
-            var customerDto = new CustomerDto(); 
+            var customerDto = new CreateCustomerRequest(); 
 
             var result = validator.TestValidate(customerDto);
 

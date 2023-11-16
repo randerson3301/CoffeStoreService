@@ -1,11 +1,11 @@
 <div class="row">
-  <div class="col col-md-3" style="height: auto; min-height: 0" *ngFor="let product of products">
+  <div class="col col-md-3 h-auto" *ngFor="let product of products">
     <a [routerLink]="['/product', product.id]">
       <div class="card">
-        <img class="card-img-top w-100 d-block"
+        <img class="card-img-top w-100 d-block" style="height: 150px;"
              [src]="product.imagePath" />
         <div class="card-body">
-          <h5 class="card-title">{{product.title}}</h5>
+          <h5 class="card-title fs-6 text-truncate" [title]="product.title">{{product.title}}</h5>
           <p class="card-text">{{product.price | currency:'BRL' : true}}</p>
           <p>
             <fa-icon [icon]="faStar"></fa-icon>

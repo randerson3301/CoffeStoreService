@@ -97,6 +97,15 @@ namespace CoffeStore.Models.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error on querying products from database.
+        /// </summary>
+        public static string QUERYING_PRODUCTS_FAILED {
+            get {
+                return ResourceManager.GetString("QUERYING_PRODUCTS_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Updating customer has failed.
         /// </summary>
         public static string UPDATE_CUSTOMER_FAILED {

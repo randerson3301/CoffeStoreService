@@ -1,34 +1,37 @@
 ﻿using CoffeStore.Models.DomainExceptions;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
 
 namespace CoffeStore.Models.Aggregates.CustomerAggregate
 {
     public sealed class Customer
     {
-        private readonly Guid _id;
         private readonly List<DeliveryAddress> _deliveryAddresses;
 
-        public Guid Id => _id;
-        public string FullName { get; }
-        public DateOnly BirthDate { get; }
-        public string Document { get; }
-        public IReadOnlyCollection<DeliveryAddress> DeliveryAddress => _deliveryAddresses.AsReadOnly();
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; private set; }
+        public string FullName { get;  set; }
+        public DateTime BirthDate { get;  set; }
+        public string Document { get;  set; }
+        //public IReadOnlyCollection<DeliveryAddress> DeliveryAddress => _deliveryAddresses.AsReadOnly();
+        public ICollection<DeliveryAddress> DeliveryAddress { get; set; }
         public CustomerAccess CustomerAccess { get; set; }
 
 
-        public Customer(string fullName, DateOnly birthDate, string document, CustomerAccess customerAccess)
+        public Customer(string fullName, DateTime birthDate, string document, CustomerAccess customerAccess)
         {
             FullName = fullName;
             BirthDate = birthDate;
             Document = document;
             CustomerAccess = customerAccess;
-            _deliveryAddresses = new List<DeliveryAddress>();
-            _id = Guid.NewGuid();
+            DeliveryAddress = new List<DeliveryAddress>();
         }
 
 
         public void AddAddress(DeliveryAddress newAddress)
         {
-            _deliveryAddresses.Add(newAddress);
+            DeliveryAddress.Add(newAddress);
         }
 
         public void RemoveAddress(DeliveryAddress addressToRemove)

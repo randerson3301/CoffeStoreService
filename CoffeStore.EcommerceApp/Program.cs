@@ -1,10 +1,14 @@
 using CoffeStore.EcommerceApp.Adapters;
 using CoffeStore.EcommerceApp.Adapters.Contracts;
+using CoffeStore.EcommerceApp.Dtos;
+using CoffeStore.EcommerceApp.Services;
+using CoffeStore.EcommerceApp.Validators;
 using CoffeStore.Infra;
 using CoffeStore.Infra.Context;
 using CoffeStore.Infra.Repositories;
 using CoffeStore.Infra.Settings;
 using CoffeStore.Models.Contracts.Repositories;
+using FluentValidation;
 using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
 
@@ -17,7 +21,13 @@ builder.Services.AddSingleton<MongoClient, CoffeStoreDbClient>();
 builder.Services.AddSingleton<CoffeStoreDbContext>();
 
 builder.Services.AddSingleton<IProductAdapter, ProductAdapter>();
+builder.Services.AddSingleton<ICustomerAdapter, CustomerAdapter>();
 builder.Services.AddSingleton<IProductRepository, ProductRepository>();
+builder.Services.AddSingleton<ICustomerRepository, CustomerRepository>();
+builder.Services.AddSingleton(new TokenService("SXkSqsKyNUyvGbnHs7ke2NCq8zQzNLW7mPmHbnZZ", "yourIssuer", "yourAudience"));
+
+builder.Services.AddScoped<IValidator<CreateCustomerRequest>, CustomerDtoValidator>();
+builder.Services.AddScoped<IValidator<CustomerAddressDto>, CustomerAddressDtoValidator>();
 
 builder.Services.AddControllersWithViews();
 

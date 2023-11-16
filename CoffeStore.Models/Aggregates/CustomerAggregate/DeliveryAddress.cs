@@ -4,21 +4,21 @@
     {
         public DeliveryAddress(string zipCode, string address, int number, string? complement, string neighborhood, string city, string state)
         {
-            ZipCode = zipCode ?? throw new ArgumentNullException(nameof(zipCode));
-            Address = address ?? throw new ArgumentNullException(nameof(address));
+            ZipCode = zipCode;
+            Address = address;
             Number = number;
             Complement = complement;
-            Neighborhood = neighborhood ?? throw new ArgumentNullException(nameof(neighborhood));
-            City = city ?? throw new ArgumentNullException(nameof(city));
-            State = state ?? throw new ArgumentNullException(nameof(state));
+            Neighborhood = neighborhood;
+            City = city;
+            State = state;
         }
-        public string ZipCode { get; }
-        public string Address { get; }
+        public string ZipCode { get; set; }
+        public string Address { get; set; }
         public int Number { get; set; }
         public string? Complement { get; set; }
-        public string Neighborhood { get; }
-        public string City { get; }
-        public string State { get; }
+        public string Neighborhood { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
 
 
 

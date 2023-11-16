@@ -1,5 +1,7 @@
 ﻿using CoffeStore.EcommerceApp.Adapters.Contracts;
 using CoffeStore.EcommerceApp.Dtos.Products;
+using CoffeStore.EcommerceApp.ViewModels;
+using CoffeStore.Models.Aggregates.ProductAggregate;
 using CoffeStore.Models.Contracts.Repositories;
 using CoffeStore.Models.Resources;
 using Microsoft.AspNetCore.Mvc;
@@ -25,16 +27,43 @@ namespace CoffeStore.EcommerceApp.Controllers
 
         // GET: api/<ProductController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> Get()
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                var viewModels = _adapter.ConvertToViewModel(await _repository.GetAvailableProductsAsync());
+                return Ok(viewModels);
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, ErrorMessages.QUERYING_PRODUCTS_FAILED);
+
+                return BadRequest(ErrorMessages.QUERYING_PRODUCTS_FAILED);
+            }
         }
 
         // GET api/<ProductController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Get(string id)
         {
-            return "value";
+            try
+            {
+                Product result = await _repository.GetProductByIdAsync(id);
+
+                if(result == null)
+                {
+                    return NotFound();
+                }
+
+                ProductViewModel viewModel = _adapter.ConvertToViewModel(result);
+                return Ok(viewModel);
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, ErrorMessages.QUERYING_PRODUCTS_FAILED);
+
+                return BadRequest(ErrorMessages.QUERYING_PRODUCTS_FAILED);
+            }
         }
 
         [HttpGet("featured")]
@@ -46,9 +75,9 @@ namespace CoffeStore.EcommerceApp.Controllers
             }
             catch (Exception error)
             {
-                _logger.LogError(error, "Error on querying products from database");
+                _logger.LogError(error, ErrorMessages.QUERYING_PRODUCTS_FAILED);
 
-                return BadRequest("Error on querying products from database");
+                return BadRequest(ErrorMessages.QUERYING_PRODUCTS_FAILED);
             }
         }
 

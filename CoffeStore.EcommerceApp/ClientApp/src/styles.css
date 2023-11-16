@@ -16,11 +16,11 @@ code {
 }
 
 body {
-  background: url('/assets/img/COFFE-BG.jpg') center / contain, #dbcaba;
+  background: url('/assets/img/COFFE-BG.jpg');
 }
 
 .default-container {
   background: var(--bs-body-bg); 
   height: auto; 
-  min-height: 550px
+  min-height: 580px
 }

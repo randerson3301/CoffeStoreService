@@ -19,7 +19,7 @@ namespace CoffeStore.Tests.ControllerTests
         private ILogger<CustomerController> _logger;
         private ICustomerRepository _repository;
         private ICustomerAdapter _adapter;
-        private IValidator<CustomerDto> _validator;
+        private IValidator<CreateCustomerRequest> _validator;
         private IValidator<CustomerAddressDto> _validatorAddress;
 
         [SetUp]
@@ -56,7 +56,7 @@ namespace CoffeStore.Tests.ControllerTests
         [Test]
         public async Task Add_InvalidDto_ReturnsBadRequest()
         {
-            var invalidDto = new CustomerDto {};
+            var invalidDto = new CreateCustomerRequest {};
             invalidDto.DeliveryAddress = new CustomerAddressDto();
             var result = await _customerController.Add(invalidDto);
 
@@ -115,7 +115,7 @@ namespace CoffeStore.Tests.ControllerTests
         [Test]
         public async Task Update_InvalidDto_ReturnsBadRequest()
         {
-            var invalidDto = new CustomerDto { };
+            var invalidDto = new CreateCustomerRequest { };
             var invalidResults = await _validator.ValidateAsync(invalidDto);
             var result = await _customerController.Update(invalidDto);
 
@@ -226,6 +226,34 @@ namespace CoffeStore.Tests.ControllerTests
 
             Assert.IsInstanceOf<BadRequestObjectResult>(result);
             Assert.AreEqual("Updating customer has failed", badRequestResult.Value);
+        }
+
+        [Test]
+        public async Task GetById_ReturnsOkWithCustomerResponse()
+        {
+            var domain = CustomerMock.GetCustomer();
+            var customerId = domain.Id;
+
+            _repository.GetByIdAsync(customerId).Returns(domain);
+
+            var result = await _customerController.GetById(customerId);
+            dynamic okObjectResult = (OkObjectResult)result;
+
+            Assert.IsInstanceOf<OkObjectResult>(result);
+            Assert.AreEqual(domain.Document, okObjectResult.Value.Document);
+        }
+
+        [Test]
+        public async Task GetById_ReturnsNotFound()
+        {
+            var domain = CustomerMock.GetCustomer();
+            var customerId = domain.Id;
+
+            _repository.GetByIdAsync(customerId).ReturnsNull();
+
+            var result = await _customerController.GetById(customerId);
+
+            Assert.IsInstanceOf<NotFoundResult>(result);
         }
     }
 }

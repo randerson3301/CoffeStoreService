@@ -5,6 +5,7 @@ using CoffeStore.Models.Contracts.Repositories;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,18 +24,33 @@ namespace CoffeStore.Infra.Repositories
         }
 
         public async Task AddAsync(Product product)
-        {
+        {            
             await _productsCollection.InsertOneAsync(product);
+        }
+
+        public async Task<ICollection<Product>> GetAvailableProductsAsync()
+        {            
+            return await GetAvailableSortedByDescending().ToListAsync();
         }
 
         public string[] GetFeaturedProductsImages()
         {           
-             var featureProducts = _productsCollection.Find(p => p.IsAvailable)
-                                    .SortByDescending(p => p.CreatedAt)
+             var featureProducts =  GetAvailableSortedByDescending()
                                     .Limit(4)
                                     .ToList();
 
             return featureProducts.Select(p => p.ImagePath).ToArray();
+        }
+
+        public async Task<Product> GetProductByIdAsync(string id)
+        {
+            return await _productsCollection.Find(p => p.Id == id).FirstOrDefaultAsync();
+        }
+
+        private IOrderedFindFluent<Product, Product> GetAvailableSortedByDescending()
+        {
+            return _productsCollection.Find(p => p.IsAvailable)
+                                        .SortByDescending(p => p.CreatedAt);
         }
     }
 }

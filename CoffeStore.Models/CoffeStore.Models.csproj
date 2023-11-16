@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MongoDB.Bson" Version="2.22.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Resources\ErrorMessages.Designer.cs">
       <DependentUpon>ErrorMessages.resx</DependentUpon>
       <DesignTime>True</DesignTime>

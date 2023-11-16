@@ -8,39 +8,40 @@ namespace CoffeStore.EcommerceApp.Validators
     {
         public CustomerAddressDtoValidator()
         {
-            When(dto => dto.Id != null, () =>
-            {
-                RuleFor(dto => dto.Id)
-                    .NotEmpty()
-                    .NotEqual(Guid.Empty);
-            });
-
             RuleFor(dto => dto.ZipCode)
                .NotEmpty()
                .Length(ValidationHelper.ZIP_CODE_LENGTH)
-               .Matches(ValidationHelper.ZIP_CODE_REGEX);
+               .Matches(ValidationHelper.ZIP_CODE_REGEX)
+               .WithName("CEP");
 
             RuleFor(dto => dto.Address)
                 .NotEmpty()
                 .MinimumLength(ValidationHelper.MIN_ADDRESS_LENGTH)
-                .Matches(ValidationHelper.ADDRESS_REGEX);
+                .Matches(ValidationHelper.ADDRESS_REGEX)
+                .WithName("Logradouro");
+
 
             RuleFor(dto => dto.Number)
-               .NotNull();
+               .NotEmpty()               
+               .WithName("Número");
 
             RuleFor(dto => dto.Neighborhood)
                 .NotEmpty()
                 .MinimumLength(ValidationHelper.MIN_ADDRESS_LENGTH)
-                .Matches(ValidationHelper.ADDRESS_REGEX);
+                .Matches(ValidationHelper.ADDRESS_REGEX)
+                .WithName("Bairro");
 
             RuleFor(dto => dto.City)
                .NotEmpty()
-               .Matches(ValidationHelper.ADDRESS_REGEX);
+               .Matches(ValidationHelper.ADDRESS_REGEX)
+               .WithName("Cidade");
 
             RuleFor(dto => dto.State)
                .NotEmpty()
                .Length(ValidationHelper.STATE_LENGTH)
-               .Matches(ValidationHelper.STATE_REGEX);
+               .Matches(ValidationHelper.STATE_REGEX)
+               .WithName("Estado");
+
         }
     }
 }

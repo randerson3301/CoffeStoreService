@@ -1,5 +1,5 @@
 ﻿using CoffeStore.EcommerceApp.Dtos;
-using CoffeStore.EcommerceApp.ViewModels.Customer;
+using CoffeStore.EcommerceApp.ViewModels;
 
 namespace CoffeStoreService.Tests.Mocks
 {
@@ -23,9 +23,9 @@ namespace CoffeStoreService.Tests.Mocks
         }
 
 
-        public static CustomerDto GetDto()
+        public static CreateCustomerRequest GetDto()
         {
-            return new CustomerDto()
+            return new CreateCustomerRequest()
             {
                 Name = "John Doe",
                 BirthDate = new DateOnly(2000, 1, 1),
@@ -36,9 +36,9 @@ namespace CoffeStoreService.Tests.Mocks
             };
         }
 
-        public static CustomerDto GetDtoWithAddress()
+        public static CreateCustomerRequest GetDtoWithAddress()
         {
-            return new CustomerDto()
+            return new CreateCustomerRequest()
             {
                 Name = "John Doe",
                 BirthDate = new DateOnly(2000, 1, 1),

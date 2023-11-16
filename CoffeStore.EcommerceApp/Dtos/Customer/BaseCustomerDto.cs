@@ -2,6 +2,5 @@
 {
     public class BaseCustomerDto
     {
-        public Guid? Id { get; set; }
     }
 }

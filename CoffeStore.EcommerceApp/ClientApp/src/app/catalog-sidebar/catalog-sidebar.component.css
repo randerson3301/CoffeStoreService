@@ -6,3 +6,26 @@
     padding-left: 21px;
     padding-top: 15px;
   }
+
+.pulse-menu {
+  display: inline-block;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }  
+}
+
+.pulse-menu .nav-link:hover {
+  animation: pulse 1.5s infinite;
+}
+
+
+
+
+

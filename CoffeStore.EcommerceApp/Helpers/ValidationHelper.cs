@@ -12,12 +12,12 @@
         public const ushort MIN_MONTH = 1;
         public const ushort MIN_DAY = 1;
 
-        public const string ADDRESS_REGEX = @"^[a-zA-Z0-9º\s]*$";
+        public const string ADDRESS_REGEX = @"^[a-zA-ZÀ-ÖØ-öø-ÿ0-9º\s]*$";
         public const string ZIP_CODE_REGEX = @"^\d{8}$";
         public const string STATE_REGEX = @"^[A-Z]{2}$";
 
-        public static DateOnly GetMinBirthDate() => new DateOnly(DateTime.Now.Year - 120, MIN_MONTH, MIN_DAY);
-        public static DateOnly GetMaxBirthDate() => new DateOnly(DateTime.Now.Year, MIN_MONTH, MIN_DAY);
+        public static DateTime GetMinBirthDate() => new DateTime(DateTime.Now.Year - 120, MIN_MONTH, MIN_DAY);
+        public static DateTime GetMaxBirthDate() => new DateTime(DateTime.Now.Year, MIN_MONTH, MIN_DAY);
 
         public static bool BeValidDocument(string document)
         {

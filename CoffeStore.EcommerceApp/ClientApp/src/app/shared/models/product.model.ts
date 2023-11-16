@@ -1,5 +1,5 @@
 export class Product {
-  public id: number = 0;
+  public id: string = "";
   public imagePath: string = "";
   public title: string = "";
   public rateNumber: number = 0.0;

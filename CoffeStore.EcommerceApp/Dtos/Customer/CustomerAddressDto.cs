@@ -1,6 +1,6 @@
 ﻿namespace CoffeStore.EcommerceApp.Dtos
 {
-    public class CustomerAddressDto: BaseCustomerDto
+    public class CustomerAddressDto
     {
         public string ZipCode { get; set; }
         public string Address { get; set; }

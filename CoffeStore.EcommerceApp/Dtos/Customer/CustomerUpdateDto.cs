@@ -2,6 +2,6 @@
 {
     public class CustomerUpdateDto : BaseCustomerDto
     {
-        public Guid Id { get; set; }
+        public new Guid Id { get; set; }
     }
 }

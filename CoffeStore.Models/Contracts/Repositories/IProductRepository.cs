@@ -10,7 +10,8 @@ namespace CoffeStore.Models.Contracts.Repositories
     public interface IProductRepository
     {
         string[] GetFeaturedProductsImages();
-
         Task AddAsync(Product product);
+        Task<ICollection<Product>> GetAvailableProductsAsync();
+        Task<Product> GetProductByIdAsync(string id);
     }
 }

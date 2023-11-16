@@ -14,6 +14,7 @@ export class CatalogSidebarComponent implements OnInit {
   }  
 
   public isCatalogRoute(): boolean {
-    return this.route.url === '/catalog';
+    //return this.route.url === '/catalog';
+    return false;
   }
 }

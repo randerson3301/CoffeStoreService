@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -27,6 +27,10 @@ import { NewAddressComponent } from './new-address/new-address.component';
 import { EditAccountComponent } from './edit-account/edit-account.component';
 import { EditPasswordComponent } from './edit-password/edit-password.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { InputErrorsComponent } from './shared/input-errors/input-errors.component';
+
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
 
 @NgModule({
@@ -53,12 +57,15 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
     EditAccountComponent,
     EditPasswordComponent,
     MyOrdersComponent,
+    InputErrorsComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     FontAwesomeModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot(options),
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },

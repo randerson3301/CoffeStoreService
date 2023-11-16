@@ -18,11 +18,9 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((paramId) => {
-      // this.productService.getProductById(paramId).subscribe((product) => {
-      //   // this.product = product;
-      // });
-      this.product = { id: paramId, price: 20.34, title: "Cafe bom", imagePath: "../assets/img/clipboard-image.png", rateNumber: 3.78, description: "um testezin basico" }
-
+      this.productService.getProductById(paramId.id).subscribe((product) => {
+          this.product = product;
+       });
     });    
   }
 

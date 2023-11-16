@@ -56,14 +56,16 @@
         class="navbar-nav me-auto"
         id="logged-nav-items"
         style="--bs-body-font-size: 1rem; font-size: 11px">
-        <li class="nav-item"></li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/login']" *ngIf="!logged">
+          <p class="text-light fs-5" style="margin-top: 10px" *ngIf="isLogged()">Olá, {{getLoggedName()}}</p>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/login']"  *ngIf="!isLogged()">
             <span style="font-weight: normal !important; color: rgb(255, 255, 255)">ENTRAR</span>
           </a>
 
 
-          <div ngbDropdown class="d-inline-block" *ngIf="logged">
+          <div ngbDropdown class="d-inline-block" *ngIf="isLogged()">
             <button class="btn btn-link text-light" id="dropdownIcon" ngbDropdownToggle>
               <fa-icon class="fs-4 text-light" [icon]="faUserCircle"></fa-icon>
             </button>
@@ -78,10 +80,10 @@
           </div>         
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/register']" *ngIf="!logged">
-            <span style="font-weight: normal !important; color: rgb(255, 255, 255)">CADASTRA-SE</span>
+          <a class="nav-link" [routerLink]="['/register']" *ngIf="!isLogged()">
+            <span style="font-weight: normal !important; color: rgb(255, 255, 255)">CADASTRE-SE</span>
           </a>
-          <a class="nav-link" [routerLink]="['/shopping-cart']" *ngIf="logged">
+          <a class="nav-link" [routerLink]="['/shopping-cart']" *ngIf="isLogged()">
             <fa-icon class="fs-4 text-light" [icon]="faShoppingCart"></fa-icon>
           </a>
         </li>
