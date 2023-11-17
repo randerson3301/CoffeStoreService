@@ -1,4 +1,5 @@
 ﻿using CoffeStore.EcommerceApp.Dtos;
+using CoffeStore.EcommerceApp.Requests.Customer.Dtos;
 using CoffeStore.EcommerceApp.ViewModels;
 using CoffeStore.Models.Aggregates.CustomerAggregate;
 

@@ -29,6 +29,8 @@ import { EditPasswordComponent } from './edit-password/edit-password.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { InputErrorsComponent } from './shared/input-errors/input-errors.component';
+import { SuccessAlertComponent } from './shared/success-alert/success-alert.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
@@ -58,6 +60,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     EditPasswordComponent,
     MyOrdersComponent,
     InputErrorsComponent,
+    SuccessAlertComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -66,6 +69,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     FormsModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(options),
+    SweetAlert2Module.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },

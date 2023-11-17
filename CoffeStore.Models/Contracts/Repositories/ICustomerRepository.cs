@@ -7,7 +7,6 @@ namespace CoffeStore.Models.Contracts.Repositories
         Task AddAsync(Customer customer);
         Task<Customer> GetByEmail(string email);
         Task<Customer> GetByIdAsync(string id);
-        Task<bool> IsCustomerRegistered(string email, string? password);
         Task UpdateAsync(Customer customer);
     }
 }

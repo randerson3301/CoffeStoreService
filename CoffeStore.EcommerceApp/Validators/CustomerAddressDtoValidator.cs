@@ -1,5 +1,5 @@
-﻿using CoffeStore.EcommerceApp.Dtos;
-using CoffeStore.EcommerceApp.Helpers;
+﻿using CoffeStore.EcommerceApp.Helpers;
+using CoffeStore.EcommerceApp.Requests.Customer.Dtos;
 using FluentValidation;
 
 namespace CoffeStore.EcommerceApp.Validators

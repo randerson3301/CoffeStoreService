@@ -2,6 +2,7 @@
 using CoffeStore.Models.Aggregates.CustomerAggregate;
 using CoffeStore.Models.Aggregates.ProductAggregate;
 using CoffeStore.Models.Contracts.Repositories;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -33,16 +34,11 @@ namespace CoffeStore.Infra.Repositories
         public async Task<Customer> GetByIdAsync(string id)
         {
             return await _customerCollection.Find(c => c.Id == id).FirstOrDefaultAsync();
-        }
+        }        
 
-        public Task<bool> IsCustomerRegistered(string email, string? password)
+        public async Task UpdateAsync(Customer customer)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync(Customer customer)
-        {
-            throw new NotImplementedException();
+            await _customerCollection.ReplaceOneAsync(x => x.Id == customer.Id, customer);
         }
     }
 }

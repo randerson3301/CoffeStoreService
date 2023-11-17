@@ -6,8 +6,6 @@ namespace CoffeStore.Models.Aggregates.CustomerAggregate
 {
     public sealed class Customer
     {
-        private readonly List<DeliveryAddress> _deliveryAddresses;
-
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; private set; }
@@ -36,23 +34,12 @@ namespace CoffeStore.Models.Aggregates.CustomerAggregate
 
         public void RemoveAddress(DeliveryAddress addressToRemove)
         {
-            if (_deliveryAddresses.HasSingleElement())
+            if (DeliveryAddress.HasSingleElement())
             {
                 throw new RemoveUniqueAddressException();
             }
 
-            _deliveryAddresses.Remove(addressToRemove);
-        }
-
-        public void UpdateAddress(DeliveryAddress newAddress)
-        {
-            var existingAddress = _deliveryAddresses.Find(a => a.ZipCode == newAddress.ZipCode);
-
-            if (!existingAddress.Equals(null))
-            {
-                AddAddress(newAddress);
-                RemoveAddress(existingAddress);
-            }
-        }
+            DeliveryAddress.Remove(addressToRemove);
+        }       
     }
 }

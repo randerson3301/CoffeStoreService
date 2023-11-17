@@ -1,5 +1,6 @@
 ﻿using CoffeStore.EcommerceApp.Adapters;
 using CoffeStore.EcommerceApp.Dtos;
+using CoffeStore.EcommerceApp.Requests.Customer.Dtos;
 using CoffeStore.EcommerceApp.Services;
 using CoffeStore.EcommerceApp.Validators;
 using CoffeStore.EcommerceApp.ViewModels;
@@ -40,15 +41,9 @@ namespace CoffeStore.EcommerceApp.Controllers
 
             if (!result.IsValid || !resultAddress.IsValid)
             {
-                result.Errors.AddRange(resultAddress.Errors);
+                result.Errors.AddRange(resultAddress.Errors);               
 
-                var errorResponse = new ErrorResponseViewModel()
-                {
-                    IsValid = result.IsValid,
-                    ErrorMessages = result.Errors.Select(e => e.ErrorMessage).ToArray()
-                };
-
-                return BadRequest(errorResponse);
+                return BadRequest(new { ErrorMessages = result.Errors.Select(e => e.ErrorMessage).ToArray() });
             }
 
             var domain = _adapter.ConvertToDomain(dto);
@@ -68,45 +63,42 @@ namespace CoffeStore.EcommerceApp.Controllers
             }
         }
 
-        //[HttpPut]
-        //public async Task<IActionResult> Update(CreateCustomerRequest dto)
-        //{
-        //    var result = await _validator.ValidateAsync(dto);
+        [HttpPost("{id}/address")]
+        public async Task<IActionResult> AddAddress(string id, CustomerAddressDto newAddress)
+        {
+            var customer = await _repository.GetByIdAsync(id);
 
-        //    if (!result.IsValid)
-        //    {
-        //        return BadRequest(result);
-        //    }
+            if (customer == null)
+            {
+                return NotFound();
+            }
 
-        //    var domain = await _repository.GetByIdAsync(dto.Id);
+            var result = await _validatorAddress.ValidateAsync(newAddress);
 
-        //    if (domain == null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (!result.IsValid)
+            {
+                return BadRequest(new { ErrorMessages = result.Errors.Select(e => e.ErrorMessage).ToArray() });
+            }
 
-        //    domain = _adapter.ConvertToDomain(dto, domain);
+            customer.AddAddress(_adapter.ConvertToDomainAddress(newAddress));
 
-        //    if (dto.DeliveryAddress != null)
-        //    {
-        //        var newAddress = _adapter.ConvertToDomainAddress(dto.DeliveryAddress); //new DeliveryAddress(newAddress.ZipCode, newAddress.Address, newAddress.Number, newAddress.Complement, newAddress.Neighborhood)
-        //        domain.AddAddress(newAddress);
-        //    }
+            try
+            {
+                await _repository.UpdateAsync(customer);
 
-        //    try
-        //    {
-        //        await _repository.UpdateAsync(domain);
-        //        return NoContent();
-        //    }
-        //    catch (Exception error)
-        //    {
-        //        _logger.LogError(error, ErrorMessages.UPDATE_CUSTOMER_FAILED);
-        //        return BadRequest(ErrorMessages.UPDATE_CUSTOMER_FAILED);
-        //    }
-        //}
+                var viewModel = _adapter.ConvertToViewModel(customer);
 
-        [HttpDelete("address")]
-        public async Task<IActionResult> DeleteAddress(string customerId, CustomerAddressDto addressToRemove)
+                return CreatedAtAction(nameof(CustomerController.Add), viewModel);
+            }
+            catch (Exception error)
+            {
+                _logger.LogError(error, ErrorMessages.ADD_CUSTOMER_FAILED);
+                return BadRequest(ErrorMessages.ADD_CUSTOMER_FAILED);
+            }
+        }        
+
+        [HttpPatch("{id}/address")]
+        public async Task<IActionResult> DeleteAddress(string id, CustomerAddressDto addressToRemove)
         {           
             var result = await _validatorAddress.ValidateAsync(addressToRemove);
 
@@ -115,7 +107,7 @@ namespace CoffeStore.EcommerceApp.Controllers
                 return BadRequest(result);
             }
 
-            var domain = await _repository.GetByIdAsync(customerId);
+            var domain = await _repository.GetByIdAsync(id);
 
             if (domain == null)
             {

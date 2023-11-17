@@ -43,6 +43,7 @@
     <None Remove="ClientApp\src\app\shared\models\login.model.ts" />
     <None Remove="ClientApp\src\app\shared\product.model.ts" />
     <None Remove="ClientApp\src\app\shared\services\customer.service.ts" />
+    <None Remove="ClientApp\src\app\shared\services\session.service.ts" />
   </ItemGroup>
 
   <ItemGroup>

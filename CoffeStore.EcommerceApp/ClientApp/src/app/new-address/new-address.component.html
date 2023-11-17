@@ -1,13 +1,16 @@
 <h1>Cadastrar novo endereço</h1>
 <div class="container">
-    <form id="address-form">      
-        <app-form-user-address></app-form-user-address>                    
-        <div class="justify-content-center d-flex form-group mb-3">
-            <div id="submit-btn">
-                <div class="row">
-                    <button class="btn btn-primary m-0 px-4" type="button" style="min-width: 500px;">Cadastrar</button>
-                </div>
-            </div>
+  <form id="address-form">
+    <app-form-user-address [userForm]="addressForm"></app-form-user-address>
+    <div class="justify-content-center d-flex form-group mb-3">
+      <div id="submit-btn">
+        <div class="row">
+          <button class="btn btn-primary m-0 px-4" type="button" (click)="addAddress()" style="min-width: 500px;">Cadastrar</button>
         </div>
-    </form>
+      </div>
+    </div>
+    <app-success-alert [showWhen]="isCustomerAddressAddedWithSuccess" [successMessage]="successMessage">
+    </app-success-alert>
+  </form>
+  <app-input-errors [errorMessages]="errorMessages"></app-input-errors>
 </div>  

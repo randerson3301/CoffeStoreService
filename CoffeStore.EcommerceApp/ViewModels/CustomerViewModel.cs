@@ -1,4 +1,4 @@
-﻿using CoffeStore.EcommerceApp.Dtos;
+﻿using CoffeStore.EcommerceApp.Requests.Customer.Dtos;
 
 namespace CoffeStore.EcommerceApp.ViewModels
 {

@@ -1,6 +1,7 @@
 ﻿using CoffeStore.EcommerceApp.Adapters;
 using CoffeStore.EcommerceApp.Controllers;
 using CoffeStore.EcommerceApp.Dtos;
+using CoffeStore.EcommerceApp.Requests.Customer.Dtos;
 using CoffeStore.EcommerceApp.Validators;
 using CoffeStore.Models.Contracts.Repositories;
 using FluentValidation;

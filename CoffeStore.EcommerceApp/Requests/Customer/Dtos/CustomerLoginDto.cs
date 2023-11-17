@@ -1,4 +1,4 @@
-﻿namespace CoffeStore.EcommerceApp.Dtos
+﻿namespace CoffeStore.EcommerceApp.Requests.Customer.Dtos
 {
     public class CustomerLoginDto
     {

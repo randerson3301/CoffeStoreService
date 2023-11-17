@@ -1,4 +1,6 @@
-﻿namespace CoffeStore.EcommerceApp.Dtos
+﻿using CoffeStore.EcommerceApp.Requests.Customer.Dtos;
+
+namespace CoffeStore.EcommerceApp.Dtos
 {
     public class CreateCustomerRequest
     {

@@ -1,7 +1,11 @@
 ﻿using CoffeStore.EcommerceApp.Dtos;
+using CoffeStore.EcommerceApp.Requests.Customer.Dtos;
 using CoffeStore.EcommerceApp.ViewModels;
 using CoffeStore.Models.Aggregates.CustomerAggregate;
 using Isopoh.Cryptography.Argon2;
+using static MongoDB.Bson.Serialization.Serializers.SerializerHelper;
+using System.Net;
+using System.Reflection.Emit;
 
 namespace CoffeStore.EcommerceApp.Adapters
 {
@@ -25,12 +29,20 @@ namespace CoffeStore.EcommerceApp.Adapters
 
         public DeliveryAddress ConvertToDomainAddress(CustomerAddressDto deliveryAddress)
         {
-            throw new NotImplementedException();
+            return new DeliveryAddress()
+            {
+                Address = deliveryAddress.Address,
+                City = deliveryAddress.City,
+                Complement = deliveryAddress.Complement,
+                Neighborhood = deliveryAddress.Neighborhood,
+                Number = deliveryAddress.Number,
+                State = deliveryAddress.State,
+                ZipCode = deliveryAddress.ZipCode
+            };
         }
 
         public CustomerViewModel ConvertToViewModel(Customer domain)
         {
-            var domainAddress = domain.DeliveryAddress.SingleOrDefault();
             return new CustomerViewModel()
             {
                 Id = domain.Id,

@@ -3,19 +3,20 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { CustomerService } from '../shared/services/customer.service';
 import { Router } from '@angular/router';
 import { CustomerLogin } from '../shared/models/login.model';
+import { SessionService } from '../shared/services/session.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [CustomerService]
+  providers: [CustomerService, SessionService]
 })
 export class LoginComponent implements OnInit {
 
   public loginForm: FormGroup | any;
   public errorMessages: string[] = [];
 
-  constructor(private fb: FormBuilder, private customerService: CustomerService, private router: Router) {
+  constructor(private fb: FormBuilder, private customerService: CustomerService, private sessionService: SessionService, private router: Router) {
     this.loginForm = this.fb.group({
       email: '',
       password: ''
@@ -34,8 +35,8 @@ export class LoginComponent implements OnInit {
 
     this.customerService.login(loginModel).subscribe(
       (res) => {
-        sessionStorage.setItem("name", res.name);
-        sessionStorage.setItem("token", res.token);
+
+        this.sessionService.setSessionKeys(res.name, res.token);
 
         setTimeout(() => this.router.navigate(['/']), 1000);
       },

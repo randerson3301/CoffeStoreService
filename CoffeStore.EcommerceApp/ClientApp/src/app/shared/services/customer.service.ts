@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { CreateCustomer } from "../models/create-customer.model";
 import { CustomerLogin } from "../models/login.model";
 import { Customer } from "../models/customer.model";
+import { CustomerAddress } from "../models/address.model";
 
 @Injectable()
 export class CustomerService { 
@@ -23,5 +24,13 @@ export class CustomerService {
 
   public getCustomerById(id: any): Observable<Customer> {
     return this.http.get<Customer>(`${this.apiUrl}/${id}`);
+  }
+
+  public addAddress(id: any, newAddress: CustomerAddress): Observable<Customer> {
+    return this.http.post<Customer>(`${this.apiUrl}/${id}/address`, newAddress);
+  }
+
+  public removeAddress(id: any, removedAddress: CustomerAddress): Observable<any> {
+    return this.http.patch<any>(`${this.apiUrl}/${id}/address`, removedAddress);
   }
 }

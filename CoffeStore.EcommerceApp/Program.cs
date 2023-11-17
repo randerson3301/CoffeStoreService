@@ -1,6 +1,7 @@
 using CoffeStore.EcommerceApp.Adapters;
 using CoffeStore.EcommerceApp.Adapters.Contracts;
 using CoffeStore.EcommerceApp.Dtos;
+using CoffeStore.EcommerceApp.Requests.Customer.Dtos;
 using CoffeStore.EcommerceApp.Services;
 using CoffeStore.EcommerceApp.Validators;
 using CoffeStore.Infra;
