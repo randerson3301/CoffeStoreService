@@ -5,15 +5,16 @@
         <th>Itens do Pedido</th>
         <th>Total</th>
         <th>Data de realização</th>
-        <th>Avaliação</th>
+        <th>Status</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let order of myOrders">
         <td>{{ order.items }}</td>
-        <td>{{ order.total }}</td>
-        <td>{{ order.orderedIn }}</td>
-        <td><ngb-rating class="fs-3" [max]="5"></ngb-rating></td>
+        <td>{{ order.total | currency:'BRL' : true}}</td>
+        <td>{{ order.orderedIn | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+        <td>{{ order.status }}</td>
+        <!--<td><ngb-rating class="fs-3" [max]="5"></ngb-rating></td>-->
       </tr>
     </tbody>
   </table>

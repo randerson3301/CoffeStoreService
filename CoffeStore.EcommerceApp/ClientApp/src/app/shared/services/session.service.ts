@@ -21,6 +21,14 @@ export class SessionService {
     return sessionStorage.getItem("name");
   }
 
+  setSessionOrder(order: any): void {
+    sessionStorage.setItem("order", JSON.stringify(order));
+  }
+
+  getSessionOrder(): string | any {
+    return sessionStorage.getItem("order");
+  }
+
   clearSession() {
     sessionStorage.clear();
   }

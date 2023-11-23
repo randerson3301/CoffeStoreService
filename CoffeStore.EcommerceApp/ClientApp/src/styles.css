@@ -11,12 +11,13 @@ code {
 
 .btn-primary {
   color: #fff;
-  background-color: #1b6ec2;
+  background-color: #000;
   border-color: #1861ac;
 }
 
 body {
-  background: url('/assets/img/COFFE-BG.jpg');
+  /*background: url('/assets/img/COFFE-BG.jpg');*/
+  background-color: #f2dac4;
 }
 
 .default-container {

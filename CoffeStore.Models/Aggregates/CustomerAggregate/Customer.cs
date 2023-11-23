@@ -12,7 +12,6 @@ namespace CoffeStore.Models.Aggregates.CustomerAggregate
         public string FullName { get;  set; }
         public DateTime BirthDate { get;  set; }
         public string Document { get;  set; }
-        //public IReadOnlyCollection<DeliveryAddress> DeliveryAddress => _deliveryAddresses.AsReadOnly();
         public ICollection<DeliveryAddress> DeliveryAddress { get; set; }
         public CustomerAccess CustomerAccess { get; set; }
 

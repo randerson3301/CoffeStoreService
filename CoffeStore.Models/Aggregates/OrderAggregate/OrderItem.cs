@@ -2,14 +2,15 @@
 {
     public struct OrderItem
     {
-        public ProductPrice ProductPrice { get; }
+        public ProductItem ProductItem { get; set; }
         public int Quantity { get; private set; }
-        public decimal Subtotal => ProductPrice.Price * Quantity;
+        public decimal Subtotal { get; set; }
 
-        public OrderItem(ProductPrice productPrice, int quantity) : this()
+        public OrderItem(ProductItem productItem, int quantity, decimal subtotal)
         {
-            ProductPrice = productPrice;
+            ProductItem = productItem;
             Quantity = quantity;
+            Subtotal = subtotal;
         }
 
         public void RaiseQuantity()

@@ -168,7 +168,6 @@ namespace CoffeStore.EcommerceApp.Controllers
                 Token = _tokenService.GenerateToken(domain.Id)
             };
 
-            //cria o login response contendo nome e token do cliente e retorna Ok
             return Ok(loginViewModel);
         }
     }

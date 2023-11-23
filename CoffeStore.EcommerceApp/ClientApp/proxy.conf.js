@@ -9,6 +9,7 @@ const PROXY_CONFIG = [
       "/weatherforecast",
       "/api/product",
       "/api/customer",
+      "/api/order",
     ],
     target: target,
     secure: false,

@@ -10,6 +10,7 @@ using CoffeStore.Infra.Repositories;
 using CoffeStore.Infra.Settings;
 using CoffeStore.Models.Contracts.Repositories;
 using FluentValidation;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
 
@@ -17,14 +18,18 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.Configure<CoffeStoreDatabaseSettings>(builder.Configuration.GetSection(nameof(CoffeStoreDatabaseSettings)));
+builder.Services.AddCors();
 
 builder.Services.AddSingleton<MongoClient, CoffeStoreDbClient>();
 builder.Services.AddSingleton<CoffeStoreDbContext>();
 
 builder.Services.AddSingleton<IProductAdapter, ProductAdapter>();
 builder.Services.AddSingleton<ICustomerAdapter, CustomerAdapter>();
+builder.Services.AddSingleton<IOrderAdapter, OrderAdapter>();
+
 builder.Services.AddSingleton<IProductRepository, ProductRepository>();
 builder.Services.AddSingleton<ICustomerRepository, CustomerRepository>();
+builder.Services.AddSingleton<IOrderRepository, OrderRepository>();
 builder.Services.AddSingleton(new TokenService("SXkSqsKyNUyvGbnHs7ke2NCq8zQzNLW7mPmHbnZZ", "yourIssuer", "yourAudience"));
 
 builder.Services.AddScoped<IValidator<CreateCustomerRequest>, CustomerDtoValidator>();
@@ -39,7 +44,12 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-
+app.UseCors(builder =>
+{
+    builder.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader();
+});
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

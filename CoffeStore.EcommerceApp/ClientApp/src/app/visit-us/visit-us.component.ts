@@ -13,8 +13,8 @@ export class VisitUsComponent implements OnInit {
 
   ngOnInit(): void {
     this.shops.push({
-      name: 'Loja Primavera',
-      fullAddress: 'Rua das Flores, 123, Jardim Primavera, São Paulo, SP',
+      name: 'Loja São Roque',
+      fullAddress: 'Rua Mathias Leme de Barros, 123, Centro, São Roque, SP',
     });
 
     // this.shops.push({

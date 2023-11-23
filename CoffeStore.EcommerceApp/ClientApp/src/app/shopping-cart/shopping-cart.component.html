@@ -14,80 +14,65 @@
         padding-top: 5px;
       "
     >
-      <span>Subtotal: R$ 10,90</span
-      ><a href="pre-order.html"
-        ><button
+      <span>Total: {{ order.total | currency:'BRL' : true}}</span>
+      <button
           class="btn btn-primary w-100"
           type="button"
-          style="height: 50px"
-        >
+              [routerLink]="['/pre-order']"
+          style="height: 50px" *ngIf="order">
           fECHAR CARRINHO
-        </button></a
-      >
+        </button>
     </div>
   </div>
 </div>
-<div
-  class="row w-100"
-  style="
+<div class="row w-100" *ngFor="let item of order.orderItems"
+     style="
     height: 60px;
     border: 0.5px solid #534741;
     margin-left: -1px;
     margin-top: 10px;
-  "
->
-  <div
-    class="col-md-3 d-xl-flex justify-content-xl-start"
-    style="padding-left: 0px; padding-right: 0px"
-  >
-    <div
-      class="card-img w-50"
-      style="
+  ">
+  <div class="col-md-3 d-xl-flex justify-content-xl-start"
+       style="padding-left: 0px; padding-right: 0px">
+    <div class="card-img w-50"
+         style="
         height: 100%;
-        background: url('assets/img/clipboard-image.png') center / cover
+        background: url('{{item.product.imagePath}}') center / cover
           no-repeat;
-      "
-    ></div>
+      "></div>
   </div>
-  <div
-    class="col-md-3 d-xl-flex justify-content-xl-start align-items-xl-center"
-  >
-    <h5>CAFEZIN MIL GRAU</h5>
+  <div class="col-md-4 d-xl-flex justify-content-xl-start align-items-xl-center">
+    <h5>{{item.product.title}}</h5>
   </div>
-  <div
-    class="col-md-3 d-xl-flex justify-content-xl-center align-items-xl-center"
-  >
-    <h5>R$ 10,90</h5>
+  <div class="col-md-3 d-xl-flex justify-content-xl-center align-items-xl-center">
+    <h5>{{item.subtotal | currency:'BRL' : true}}</h5>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-2">
     <div class="row" style="height: 100%">
       <div
         class="col d-xl-flex justify-content-xl-end align-items-xl-center col-4"
         style="padding-right: 0px; padding-left: 0px"
       >
         <button
-          class="btn btn-primary d-block d-xl-flex justify-content-xl-center align-items-xl-center icon-button w-100 h-100"
+          class="btn d-block d-xl-flex justify-content-xl-center align-items-xl-center icon-button w-100 h-100"
           type="button"
-          style="height: 100%"
-        >
-          <fa-icon [icon]="faMinusCircle" class="fs-2"></fa-icon>
+          style="height: 100%" (click)="dropItemQuantity(item)">
+          <fa-icon [icon]="faMinusCircle" class="fs-3"></fa-icon>
         </button>
       </div>
       <div
         class="col d-xl-flex justify-content-xl-center align-items-xl-center col-4"
       >
-        <span>2</span>
+        <span>{{item.quantity}}</span>
       </div>
       <div
         class="col d-xl-flex justify-content-xl-end align-items-xl-center col-4"
-        style="padding-left: 0px; padding-right: 0px"
-      >
+        style="padding-left: 0px; padding-right: 0px">
         <button
-          class="btn btn-primary d-block d-xl-flex justify-content-xl-center align-items-xl-center icon-button w-100 h-100"
+          class="btn d-block d-xl-flex justify-content-xl-center align-items-xl-center icon-button w-100 h-100"
           type="button"
-          style="height: 100%"
-        >
-          <fa-icon [icon]="faPlusCircle" class="fs-2"></fa-icon>
+          style="height: 100%" (click)="raiseItemQuantity(item)">
+          <fa-icon [icon]="faPlusCircle" class="fs-3"></fa-icon>
         </button>
       </div>
     </div>

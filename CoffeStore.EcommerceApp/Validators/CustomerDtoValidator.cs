@@ -1,6 +1,7 @@
 ﻿using CoffeStore.EcommerceApp.Dtos;
 using CoffeStore.EcommerceApp.Helpers;
 using FluentValidation;
+using System.Globalization;
 
 namespace CoffeStore.EcommerceApp.Validators
 {
@@ -8,6 +9,7 @@ namespace CoffeStore.EcommerceApp.Validators
     {
         public CustomerDtoValidator()
         {
+            ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("pt-BR");
 
             RuleFor(dto => dto.Name)
                 .NotEmpty()
@@ -33,14 +35,7 @@ namespace CoffeStore.EcommerceApp.Validators
             RuleFor(dto => dto.Login.Password)
                 .NotEmpty()
                 .MinimumLength(ValidationHelper.MIN_PASSWORD_LENGTH)
-                .WithName("Senha");
-
-            //When(dto => dto.Id != null, () =>
-            //{
-            //    RuleFor(dto => dto.Id)
-            //        .NotEmpty()
-            //        .NotEqual(Guid.Empty);
-            //});
+                .WithName("Senha");            
         }
     }
 }

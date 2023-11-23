@@ -7,8 +7,6 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { FooterComponent } from './footer/footer.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { ProductComponent } from './product/product.component';
@@ -31,17 +29,15 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { InputErrorsComponent } from './shared/input-errors/input-errors.component';
 import { SuccessAlertComponent } from './shared/success-alert/success-alert.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { PreOrderComponent } from './pre-order/pre-order.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
-
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
+    HomeComponent,    
     FooterComponent,
     CatalogComponent,
     ProductComponent,
@@ -61,6 +57,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     MyOrdersComponent,
     InputErrorsComponent,
     SuccessAlertComponent,
+    PreOrderComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -71,9 +68,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     NgxMaskModule.forRoot(options),
     SweetAlert2Module.forRoot(),
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
+      { path: '', component: HomeComponent, pathMatch: 'full' },     
       { path: 'catalog', component: CatalogComponent },
       { path: 'product/:id', component: ProductComponent },
       { path: 'visit-us', component: VisitUsComponent },
@@ -86,6 +81,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
       { path: 'edit-account', component: EditAccountComponent },
       { path: 'edit-password', component: EditPasswordComponent },
       { path: 'my-orders', component: MyOrdersComponent },
+      { path: 'pre-order', component: PreOrderComponent },
     ]),
     NgbModule,
   ],

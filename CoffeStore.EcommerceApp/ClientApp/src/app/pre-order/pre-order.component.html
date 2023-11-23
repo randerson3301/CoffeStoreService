@@ -1,0 +1,84 @@
+<form [formGroup]="orderForm">
+  <div class="row w-100" style="border-bottom-width: 0.4px;border-bottom-style: solid; min-height:120px">
+    <div class="col col-12">
+      <h3>endereço de entrega</h3>
+      <!--<p>00000-000</p>
+      <p><span style="color: rgb(17, 17, 17);">Rua das Acácias, 123, Jardim das Flores, Rio de Janeiro, RJ</span></p>-->
+      <select class="form-control" id="addressSelect" formControlName="selectAddress" required="">
+        <option value="" disabled selected>Selecione o endereço para entrega...</option>
+        <option *ngFor="let address of customer.addresses" [value]="address.zipCode"> {{address.address}}, {{address.number}}, {{address.neighborhood}}, {{address.city}}, {{address.state}}</option>
+      </select>
+    </div>
+    <!--<div class="col text-center d-xl-flex justify-content-xl-end align-items-xl-center col-4"><button class="btn btn-primary" type="button">alterar</button></div>-->
+  </div>
+  <div class="row w-100" style="border-bottom-width: 0.4px;border-bottom-style: solid;">
+    <div class="col col-12">
+      <h3>FORMA DE PAGAMENTO</h3>
+    </div>
+    <div class="col">
+      <section>
+        <div class="container">
+            <div class="form-group mb-3">
+              <div class="row">
+                <div class="col">
+                  <p>Número do cartão</p><input class="form-control" type="text" required="" formControlName="cardNumber" mask="0000.0000.0000.0000" >
+                </div>
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <p>Nome no cartão</p><input class="form-control" type="text" required="" formControlName="cardFullName" placeholder="Ex: João">
+            </div>
+            <div class="row">
+              <div class="col col-6">
+                <div class="form-group mb-3">
+                  <p>Expira em</p><input class="form-control" type="text" required="" formControlName="cardExpiration" placeholder="XX/XX" mask="00/00">
+                </div>
+              </div>
+              <div class="col col-6">
+                <div class="form-group mb-3">
+                  <p>CVV</p><input class="form-control" type="text" required="" formControlName="cardCvv" placeholder="XXX" mask="000">
+                </div>
+              </div>
+            </div>
+        </div>       
+      </section>
+    </div>
+  </div>
+</form>
+<div class="row w-100" style="border-bottom-width: 0.4px;border-bottom-style: solid;">
+  <div class="col">
+    <h3>itens do pedido</h3>
+    <div class="row w-100" style="height: 60px;border: 0.5px solid #534741;margin-left: -1px;margin-top: 3px;" *ngFor="let item of order.orderItems">
+      <div class="col-md-3 d-xl-flex justify-content-xl-start" style="padding-left: 0px;padding-right: 0px;">
+        <div class="card-img w-50" style="height: 100%;background: url(&quot;{{item.product.imagePath}}&quot;) center / cover no-repeat;"></div>
+      </div>
+      <div class="col-md-3 d-xl-flex justify-content-xl-start align-items-xl-center col-md-5">
+        <h5>{{item.product.title}}</h5>
+      </div>
+      <div class="col-md-2 d-xl-flex justify-content-xl-center align-items-xl-center">
+        <span>{{item.quantity}}x</span>
+      </div>
+      <div class="col-md-2 d-xl-flex justify-content-xl-center align-items-xl-center">
+        <h5>{{item.subtotal | currency:'BRL' : true}}</h5>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row d-xl-flex align-items-xl-center w-100" style="border-bottom-width: 0.4px;border-bottom-style: solid;height: 80px;">
+  <div class="col d-xl-flex align-items-xl-center col-9">
+    <h3>total a pagar:&nbsp;<span>{{order.total | currency:'BRL' : true}}</span></h3>
+  </div>
+  <div class="col col-3"><button class="btn btn-primary w-100" type="button" (click)="closeOrder()">finalizar pedido</button></div>
+</div>
+<swal #validationError
+      title="Erro ao finalizar pedido"
+      text="Por favor, preencha todos os campos corretamente"
+      icon="error">
+</swal>
+<swal #successOrder
+      title="Pedido finalizado com sucesso!"
+      text="Muito obrigado por comprar na CoffeStore, volte sempre que possivel!"
+      icon="success"
+      (confirm)="endOrder()"
+      >
+</swal>

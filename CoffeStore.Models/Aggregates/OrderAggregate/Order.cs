@@ -1,34 +1,39 @@
 ﻿using CoffeStore.Models.Enums;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
+using CoffeStore.Models.Aggregates.CustomerAggregate;
 
 namespace CoffeStore.Models.Aggregates.OrderAggregate
 {
     public sealed class Order
     {
-        private readonly Guid _id;
-        private readonly List<OrderItem> _orderItems;
-
-        public Guid Id => _id;
-        public CustomerAddress CustomerAddress;
-        public IReadOnlyCollection<OrderItem> OrderItems => _orderItems.AsReadOnly();
-        public decimal Amount => _orderItems.Sum(item => item.Subtotal);
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
+        public string CustomerId { get; set; }
+        public DeliveryAddress CustomerAddress;
+        public ICollection<OrderItem> OrderItems { get; private set; }
+        public decimal Amount { get; set; }
         public DeliveryStatusEnum DeliveryStatus { get; private set; }
+        public DateTime CreatedAt { get; set; }
 
-        public Order(CustomerAddress customerAddress)
+        public Order(DeliveryAddress customerAddress, string customerId)
         {
             CustomerAddress = customerAddress;
-            _orderItems = new List<OrderItem>();
-            _id = Guid.NewGuid();
+            OrderItems = new List<OrderItem>();
             DeliveryStatus = DeliveryStatusEnum.New;
+            CustomerId = customerId;
+            CreatedAt = DateTime.Now;
         }
 
         public void AddOrderItem(OrderItem orderItem)
         {
-            _orderItems.Add(orderItem);
+            OrderItems.Add(orderItem);
         }
 
         public void RemoveOrderItem(OrderItem orderItem)
         {
-            _orderItems.Remove(orderItem);
+            OrderItems.Remove(orderItem);
         }
 
         public void ChangeDeliveryStatus(DeliveryStatusEnum newStatus)

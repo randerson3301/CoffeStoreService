@@ -1,6 +1,7 @@
 ﻿using CoffeStore.EcommerceApp.Helpers;
 using CoffeStore.EcommerceApp.Requests.Customer.Dtos;
 using FluentValidation;
+using System.Globalization;
 
 namespace CoffeStore.EcommerceApp.Validators
 {
@@ -8,6 +9,8 @@ namespace CoffeStore.EcommerceApp.Validators
     {
         public CustomerAddressDtoValidator()
         {
+            ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("pt-BR");
+
             RuleFor(dto => dto.ZipCode)
                .NotEmpty()
                .Length(ValidationHelper.ZIP_CODE_LENGTH)

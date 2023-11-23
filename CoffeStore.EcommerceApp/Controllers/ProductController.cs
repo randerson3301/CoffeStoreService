@@ -97,18 +97,6 @@ namespace CoffeStore.EcommerceApp.Controllers
                 _logger.LogError(error, "Adding new product has failed");
                 return BadRequest("Adding new product has failed");
             }
-        }
-
-        // PUT api/<ProductController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<ProductController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        }        
     }
 }
