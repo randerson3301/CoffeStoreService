@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 
 @Injectable()
 export class OrderService {
-  private apiUrl = "https://coffestoreecommerceappapi.azure-api.net/";
+  @Inject('BASE_URL') private apiUrl = "";
 
   constructor(private http: HttpClient) {
     this.apiUrl += 'api/order';
