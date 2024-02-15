@@ -14,7 +14,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeStore.Models", "CoffeS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeStore.EcommerceApp", "CoffeStore.EcommerceApp\CoffeStore.EcommerceApp.csproj", "{FADAFE33-FC12-492E-BB37-CF252420EF6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeStore.Infra", "CoffeStore.Infra\CoffeStore.Infra.csproj", "{71965C2D-B9E3-49B0-828B-8763A195AAEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeStore.Infra", "CoffeStore.Infra\CoffeStore.Infra.csproj", "{71965C2D-B9E3-49B0-828B-8763A195AAEB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{E720F357-70F4-4E94-A252-28C731F5907D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeStore.Modules.Customers", "CoffeStore.Modules.Customers\CoffeStore.Modules.Customers.csproj", "{7F89C748-4596-477F-A0AC-4BC570BC09E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,9 +42,16 @@ Global
 		{71965C2D-B9E3-49B0-828B-8763A195AAEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71965C2D-B9E3-49B0-828B-8763A195AAEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71965C2D-B9E3-49B0-828B-8763A195AAEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F89C748-4596-477F-A0AC-4BC570BC09E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F89C748-4596-477F-A0AC-4BC570BC09E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F89C748-4596-477F-A0AC-4BC570BC09E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F89C748-4596-477F-A0AC-4BC570BC09E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7F89C748-4596-477F-A0AC-4BC570BC09E2} = {E720F357-70F4-4E94-A252-28C731F5907D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {206AFF75-4F33-41AA-AB74-FE86E14E414A}
