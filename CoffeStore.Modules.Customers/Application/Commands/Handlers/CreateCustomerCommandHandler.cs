@@ -41,7 +41,6 @@ namespace CoffeStore.Modules.Customers.Application.Commands.Handlers
                 }
                 catch (Exception error)
                 {
-                    _errorContext.AddError(ErrorType.ExceptionThrowed, error.Message);
                     _logger.LogError(error.Message);
                     throw;
                 }               

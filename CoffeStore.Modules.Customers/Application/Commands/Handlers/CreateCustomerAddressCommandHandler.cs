@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace CoffeStore.Modules.Customers.Application.Commands.Handlers
 {
-    internal class CreateCustomerAddressCommandHandler : IRequestHandler<CreateCustomerAddressCommand, CustomerViewModel>
+    internal class CreateCustomerAddressCommandHandler : IRequestHandler<CreateCustomerAddressCommand, CustomerViewModel?>
     {
         private ICustomerRepository _repository;
         private ICustomerAdapter _adapter;
@@ -26,38 +26,39 @@ namespace CoffeStore.Modules.Customers.Application.Commands.Handlers
             _errorContext = errorContext;
         }
 
-        public async Task<CustomerViewModel> Handle(CreateCustomerAddressCommand request, CancellationToken cancellationToken)
+        public async Task<CustomerViewModel?> Handle(CreateCustomerAddressCommand request, CancellationToken cancellationToken)
         {
-            var customer = await _repository.GetByIdAsync(request.Id);
-
-            if (customer == null)
-            {
-                _errorContext.AddError(ErrorType.NotFound, ErrorMessages.CUSTOMER_NOT_FOUND);
-                return null;
-            }
-
             var result = await _validator.ValidateAsync(request);
 
             if (result.IsValid)
             {
-                customer.AddAddress(_adapter.ConvertToDomain(customer.Id, request.DeliveryAddress));
-
                 try
-                {                    
-                    await _repository.UpdateAsync(customer);
+                {
+                    var customer = await _repository.GetByIdAsync(request.Id);
 
+                    if (customer == null)
+                    {
+                        _errorContext.AddError(ErrorType.NotFound, ErrorMessages.CUSTOMER_NOT_FOUND);
+                        return null;
+                    }
+
+                    if (!customer.TryAddAddress(_adapter.ConvertToDomain(customer.Id, request.DeliveryAddress)))
+                    {
+                        _errorContext.AddError(ErrorType.InvalidOperation, ErrorMessages.CANNOT_ADD_SAME_ADDRESS);
+                        return null;
+                    }
+
+                    await _repository.UpdateAsync(customer);
                     return _adapter.ConvertToViewModel(customer);
                 }
                 catch (Exception error)
                 {
-                    _errorContext.AddError(ErrorType.ExceptionThrowed, error.Message);
                     _logger.LogError(error.Message);
-                    return null;
+                    throw;
                 }
             }
 
             _errorContext.AddError(ErrorType.FailedValidation, result.Errors.Select(e => e.ErrorMessage).ToArray());
-
             return null;
         }
     }

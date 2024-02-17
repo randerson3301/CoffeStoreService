@@ -16,7 +16,7 @@ namespace CoffeStore.Modules.Customers.Application.Adapters
             var domain = new Customer(request.Name, request.BirthDate, request.Document, request.Email);
             var newAddress = request.DeliveryAddress;
 
-            domain.AddAddress(ConvertToDomain(domain.Id, newAddress));
+            domain.TryAddAddress(ConvertToDomain(domain.Id, newAddress));
 
             return domain;
         }

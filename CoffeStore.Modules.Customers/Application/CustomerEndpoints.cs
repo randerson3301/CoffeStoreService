@@ -19,7 +19,9 @@ namespace CoffeStore.Modules.Customers.Application
                     if (result == null) return Results.BadRequest(errorContext.GetErrors());
 
                     return Results.Created("/customer", result);
-                }).WithOpenApi();
+                }).WithOpenApi()
+                .Produces(201)
+                .Produces(400);
 
 
             app.MapPost("/customer/{id}/address",
@@ -41,7 +43,10 @@ namespace CoffeStore.Modules.Customers.Application
                     }
 
                     return Results.Ok(result);
-                }).WithOpenApi();
+                }).WithOpenApi()
+                .Produces(201)
+                .Produces(404)
+                .Produces(400);
 
             app.MapDelete("/customer/{id}/address",
                 async (Guid id, [FromBody] DeleteCustomerAddressCommand addressToRemove, IMediator mediator, IErrorContext errorContext) =>
@@ -63,7 +68,10 @@ namespace CoffeStore.Modules.Customers.Application
 
                     return Results.NoContent();
 
-                }).WithOpenApi();
+                }).WithOpenApi()
+                .Produces(204)
+                .Produces(404)
+                .Produces(400);
 
             app.MapGet("/customer/{id}", async (Guid id, IMediator mediator, IErrorContext errorContext) =>
             {
@@ -72,11 +80,18 @@ namespace CoffeStore.Modules.Customers.Application
 
                 if (result == null)
                 {
-                    return Results.BadRequest(errorContext.GetErrors());
+                    var error = errorContext.GetErrors();
+
+                    if (error.ErrorType == ErrorType.NotFound)
+                    {
+                        return Results.NotFound(error);
+                    }
                 }
 
                 return Results.Ok(result);
-            }).WithOpenApi();
+            }).WithOpenApi()
+            .Produces(200)
+            .Produces(404);
         }
     }
 }

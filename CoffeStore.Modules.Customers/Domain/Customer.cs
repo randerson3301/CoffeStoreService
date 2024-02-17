@@ -28,24 +28,26 @@ namespace CoffeStore.Modules.Customers.Domain
         }
 
 
-        public void AddAddress(CustomerAddress newAddress)
+        public bool TryAddAddress(CustomerAddress newAddress)
         {
             if (_deliveryAddresses.Contains(newAddress))
             {
-                throw new AddSameAddressException();
+                return false;
             }
 
             _deliveryAddresses.Add(newAddress);
+            return true;
         }
 
-        public void RemoveAddress(CustomerAddress addressToRemove)
+        public bool TryRemoveAddress(CustomerAddress addressToRemove)
         {
             if (_deliveryAddresses.Count == 1)
             {
-                throw new RemoveUniqueAddressException();
+                return false;
             }
 
             _deliveryAddresses.Remove(addressToRemove);
+            return true;
         }
     }
 

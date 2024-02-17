@@ -7,6 +7,7 @@ using CoffeStore.Modules.Customers.Domain.DomainExceptions;
 using CoffeStore.Modules.Customers.Resources;
 using FluentValidation;
 using MediatR;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CoffeStore.Modules.Customers.Application.Commands.Handlers
 {
@@ -35,34 +36,34 @@ namespace CoffeStore.Modules.Customers.Application.Commands.Handlers
 
             if (result.IsValid)
             {
-                Customer? customer = await _repository.GetByIdAsync(request.Id);
-
-                if (customer == null)
-                {
-                    _errorContext.AddError(ErrorType.NotFound, ErrorMessages.CUSTOMER_NOT_FOUND);
-                    return false;
-                }
-
                 try
                 {
-                    customer.RemoveAddress(_adapter.ConvertToDomain(request));
+                    Customer? customer = await _repository.GetByIdAsync(request.Id);
+
+                    if (customer == null)
+                    {
+                        _errorContext.AddError(ErrorType.NotFound, ErrorMessages.CUSTOMER_NOT_FOUND);
+                        return false;
+                    }
+
+                    if (!customer.TryRemoveAddress(_adapter.ConvertToDomain(request)))
+                    {
+                        _errorContext.AddError(ErrorType.InvalidOperation, ErrorMessages.CANNOT_REMOVE_ADDRESS);
+                        return false;
+                    }                    
 
                     await _repository.UpdateAsync(customer);
-
                     return true;
 
-                }                 
+                }
                 catch (Exception error)
                 {
-                    _errorContext.AddError(ErrorType.ExceptionThrowed, error.Message);
                     _logger.LogError(error.Message);
-                    return false;
+                    throw;
                 }
             }
 
             _errorContext.AddError(ErrorType.FailedValidation, result.Errors.Select(e => e.ErrorMessage).ToArray());
-
-
             return false;
         }
     }

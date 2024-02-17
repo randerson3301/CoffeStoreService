@@ -5,6 +5,6 @@ namespace CoffeStore.Modules.Customers.Application.ErrorContext
     {
         NotFound = 0,
         FailedValidation = 1,
-        ExceptionThrowed = 2
+        InvalidOperation = 2
     }
 }
