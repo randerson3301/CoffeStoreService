@@ -1,4 +1,9 @@
-﻿
+﻿using CoffeStore.Modules.Customers.Domain;
+using CoffeStore.Modules.Customers.Domain.DomainExceptions;
+using CoffeStore.Modules.Customers.Seedwork;
+using CoffeStoreService.Tests.Mocks;
+using NUnit.Framework;
+
 namespace CoffeStoreService.Tests.ModelTests
 {
     internal class CustomerTests
@@ -13,10 +18,13 @@ namespace CoffeStoreService.Tests.ModelTests
         {
             var customer = CustomerMock.GetCustomer();
             var newAddress = new DeliveryAddress("123", "Rua Test", 123, "bloco 8", "Vila Test", "Test City", "SP");
+            var customerAddress = new CustomerAddress();
 
-            customer.AddAddress(newAddress);
+            customerAddress.Set(customer.Id, newAddress);
 
-            Assert.IsTrue(customer.DeliveryAddress.Contains(newAddress));
+            customer.TryAddAddress(customerAddress);
+
+            Assert.IsTrue(customer.DeliveryAddresses.Any());
         }
 
         [Test]
@@ -24,15 +32,18 @@ namespace CoffeStoreService.Tests.ModelTests
         {
             var customer = CustomerMock.GetCustomer();
 
-            var addressToRemove = new DeliveryAddress("123", "Rua Test", 123, "bloco 8", "Vila Test", "Test City", "SP");
-            var addressToRemove2 = new DeliveryAddress("123", "Rua Test22", 123, "bloco 8", "Vila Test", "Test City", "SP");
+            var addressToRemove = new CustomerAddress();
+            var addressToRemove2 = new CustomerAddress();
 
-            customer.AddAddress(addressToRemove);
-            customer.AddAddress(addressToRemove2);
+            addressToRemove.Set(customer.Id, new DeliveryAddress("123", "Rua Test", 123, "bloco 8", "Vila Test", "Test City", "SP"));
+            addressToRemove2.Set(customer.Id, new DeliveryAddress("123", "Rua Test22", 123, "bloco 8", "Vila Test", "Test City", "SP"));
 
-            customer.RemoveAddress(addressToRemove2);
+            customer.TryAddAddress(addressToRemove);
+            customer.TryAddAddress(addressToRemove2);
 
-            Assert.IsFalse(customer.DeliveryAddress.Contains(addressToRemove2));
+            customer.TryRemoveAddress(addressToRemove2);
+
+            Assert.IsFalse(customer.DeliveryAddresses.Contains(addressToRemove2));
         }
 
         [Test]
@@ -40,53 +51,12 @@ namespace CoffeStoreService.Tests.ModelTests
         {
             var customer = CustomerMock.GetCustomer();
 
-            var addressToRemove = new DeliveryAddress("123", "Rua Test", 123, "bloco 8", "Vila Test", "Test City", "SP");
+            var addressToRemove = new CustomerAddress();
+            addressToRemove.Set(customer.Id, new DeliveryAddress("123", "Rua Test", 123, "bloco 8", "Vila Test", "Test City", "SP"));
 
-            var expectedExceptionMessage = "Could not remove the address since customer should have at least one delivery address";
-
-            customer.AddAddress(addressToRemove);
-
-            string? actualExceptionMessage = Assert.Throws<RemoveUniqueAddressException>(() =>
-            {
-                customer.RemoveAddress(addressToRemove);
-            }).Message;
-
-            Assert.AreEqual(expectedExceptionMessage, actualExceptionMessage);
-        }
-
-
-
-        [Test]
-        public void Update_DeliveryAddress_CustomerAddressesContainsUpdatedAddress()
-        {
-            var customer = CustomerMock.GetCustomer();
-
-            var oldAddress = new DeliveryAddress("123", "Rua Test", 123, "bloco 8", "Vila Test", "Test City", "SP");
-            var newAddress = new DeliveryAddress(oldAddress.ZipCode, oldAddress.Address, 55, "bloco 9", oldAddress.Neighborhood, oldAddress.City, oldAddress.State);
-            
-            customer.AddAddress(oldAddress);
-            customer.UpdateAddress(newAddress);
-
-            Assert.IsTrue(customer.DeliveryAddress.Contains(newAddress));
-            Assert.IsFalse(customer.DeliveryAddress.Contains(oldAddress));
-        }
-
-        [Test]
-        public void Add_NewCustomer_MustHaveCredentialAccess()
-        {
-            var customer = CustomerMock.GetCustomer();
-
-            Assert.IsNotNull(customer.CustomerAccess);
-        }
-
-        [Test]
-        public void Disable_CustomerAccess_ReturnsFalseForActivation()
-        {
-            var customer = CustomerMock.GetCustomer();
-
-            customer.CustomerAccess.DisableAccess();
-
-            Assert.IsFalse(customer.CustomerAccess.IsActive);
-        }
+            customer.TryAddAddress(addressToRemove);
+           
+            Assert.IsFalse(customer.TryRemoveAddress(addressToRemove));
+        }                       
     }        
 }

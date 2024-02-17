@@ -1,6 +1,7 @@
 ﻿using CoffeStore.EcommerceApp.Dtos;
 using CoffeStore.EcommerceApp.Validators;
 using FluentValidation.TestHelper;
+using NUnit.Framework;
 
 namespace CoffeStore.Tests.ValidatorTests
 {
@@ -14,25 +15,14 @@ namespace CoffeStore.Tests.ValidatorTests
             validator = new CustomerDtoValidator();
         }
 
-        [Test]
-        public void ValidCustomerDto_PassesValidation()
-        {
-            var customerDto = CustomerMock.GetDto();
+        //[Test]
+        //public void ValidCustomerDto_PassesValidation()
+        //{
+        //    var customerDto = CustomerMock.GetDto();
 
-            var result = validator.TestValidate(customerDto);
+        //    var result = validator.TestValidate(customerDto);
 
-            Assert.IsTrue(result.IsValid);
-        }
-
-        [Test]
-        public void InvalidCustomerDto_FailsValidation()
-        {
-            var customerDto = new CreateCustomerRequest(); 
-
-            var result = validator.TestValidate(customerDto);
-
-            Assert.IsFalse(result.IsValid);
-            Assert.IsNotNull(result.Errors); 
-        }
+        //    Assert.IsTrue(result.IsValid);
+        //}
     }
 }

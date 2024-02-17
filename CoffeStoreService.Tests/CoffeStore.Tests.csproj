@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
     <PackageReference Include="NSubstitute" Version="5.1.0" />
     <PackageReference Include="NUnit" Version="3.13.3" />
@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CoffeStore.EcommerceApp\CoffeStore.EcommerceApp.csproj" />
     <ProjectReference Include="..\CoffeStore.Models\CoffeStore.Models.csproj" />
+    <ProjectReference Include="..\CoffeStore.Modules.Customers\CoffeStore.Modules.Customers.csproj" />
   </ItemGroup>
 
 </Project>

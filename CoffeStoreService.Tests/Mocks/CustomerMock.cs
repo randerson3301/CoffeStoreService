@@ -1,5 +1,7 @@
-﻿using CoffeStore.EcommerceApp.Dtos;
-using CoffeStore.EcommerceApp.ViewModels;
+﻿using CoffeStore.Modules.Customers.Application.Commands;
+using CoffeStore.Modules.Customers.Application.ViewModels;
+using CoffeStore.Modules.Customers.Domain;
+using CoffeStore.Modules.Customers.Seedwork;
 
 namespace CoffeStoreService.Tests.Mocks
 {
@@ -7,8 +9,7 @@ namespace CoffeStoreService.Tests.Mocks
     {
         public static Customer GetCustomer()
         {
-            var customerAccess = new CustomerAccess("teste@teste.com", "senha123");
-            return new Customer("Test", DateOnly.MinValue, "1234", customerAccess);
+            return new Customer("Test", DateOnly.MinValue, "1234", "teste@teste.com");
         }
 
         public static CustomerViewModel GetCustomerViewModel()
@@ -23,43 +24,57 @@ namespace CoffeStoreService.Tests.Mocks
         }
 
 
-        public static CreateCustomerRequest GetDto()
+        //public static CreateCustomerRequest GetDto()
+        //{
+        //    return new CreateCustomerRequest()
+        //    {
+        //        Name = "John Doe",
+        //        BirthDate = new DateOnly(2000, 1, 1),
+        //        Document = "70152246070",
+        //        Email = "john.doe@example.com",
+        //        Password = "Password123",               
+        //        Id = Guid.NewGuid(),
+        //    };
+        //}
+
+        //public static CreateCustomerRequest GetDtoWithAddress()
+        //{
+        //    return new CreateCustomerRequest()
+        //    {
+        //        Name = "John Doe",
+        //        BirthDate = new DateOnly(2000, 1, 1),
+        //        Document = "70152246070",
+        //        Email = "john.doe@example.com",
+        //        Password = "Password123",
+        //        DeliveryAddress = new CustomerAddressDto
+        //        {
+        //            ZipCode = "12345678",
+        //            Address = "123 Main St",
+        //            Number = 123,
+        //            Neighborhood = "Suburb",
+        //            City = "City",
+        //            State = "ST",
+        //        },
+        //        Id = Guid.NewGuid(),
+        //    };
+        //}
+
+        public static DeliveryAddress GetCustomerAddress()
         {
-            return new CreateCustomerRequest()
-            {
-                Name = "John Doe",
-                BirthDate = new DateOnly(2000, 1, 1),
-                Document = "70152246070",
-                Email = "john.doe@example.com",
-                Password = "Password123",               
-                Id = Guid.NewGuid(),
-            };
+            return new DeliveryAddress("12345678", "123 Main St", 123, "", "Suburb", "City", "ST");
         }
 
-        public static CreateCustomerRequest GetDtoWithAddress()
+        public static CreateCustomerCommand GetCommand()
         {
-            return new CreateCustomerRequest()
+            return new CreateCustomerCommand()
             {
                 Name = "John Doe",
                 BirthDate = new DateOnly(2000, 1, 1),
                 Document = "70152246070",
                 Email = "john.doe@example.com",
                 Password = "Password123",
-                DeliveryAddress = new CustomerAddressDto
-                {
-                    ZipCode = "12345678",
-                    Address = "123 Main St",
-                    Number = 123,
-                    Neighborhood = "Suburb",
-                    City = "City",
-                    State = "ST",
-                },
-                Id = Guid.NewGuid(),
+                DeliveryAddress = GetCustomerAddress(),
             };
-        }
-
-        public static DeliveryAddress GetCustomerAddress() {
-            return new DeliveryAddress("12345678", "123 Main St", 123, "", "Suburb", "City", "ST");            
         }
     }
 }

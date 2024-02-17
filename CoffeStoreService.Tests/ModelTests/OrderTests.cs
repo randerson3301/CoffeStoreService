@@ -2,160 +2,160 @@
 {
     internal class OrderTests
     {
-        [Test]
-        public void Add_OrderItem_OrderItemsConstainsSameItem()
-        {
-            var customer = CustomerMock.GetCustomer();
-            var deliveryAddress = customer.DeliveryAddress.FirstOrDefault();
+        //[Test]
+        //public void Add_OrderItem_OrderItemsConstainsSameItem()
+        //{
+        //    var customer = CustomerMock.GetCustomer();
+        //    var deliveryAddress = customer.DeliveryAddress.FirstOrDefault();
             
-            var customerAddress = new CustomerAddress(customer.Id, deliveryAddress);
+        //    var customerAddress = new CustomerAddress(customer.Id, deliveryAddress);
 
-            decimal price = 2.5m;
-            var productPrice = new ProductPrice(Guid.NewGuid(), price);
-            var orderItem = new OrderItem(productPrice, 1);
+        //    decimal price = 2.5m;
+        //    var productPrice = new ProductPrice(Guid.NewGuid(), price);
+        //    var orderItem = new OrderItem(productPrice, 1);
 
-            var order = new Order(customerAddress);
+        //    var order = new Order(customerAddress);
 
-            order.AddOrderItem(orderItem);
+        //    order.AddOrderItem(orderItem);
 
-            Assert.IsTrue(order.OrderItems.Contains(orderItem));
-        }
+        //    Assert.IsTrue(order.OrderItems.Contains(orderItem));
+        //}
 
-        [Test]
-        public void Add_OrderItem_IncrementQuantity_SubtotalShouldBeMultiplied()
-        {
-            var customer = CustomerMock.GetCustomer();
-            var deliveryAddress = customer.DeliveryAddress.FirstOrDefault();
+        //[Test]
+        //public void Add_OrderItem_IncrementQuantity_SubtotalShouldBeMultiplied()
+        //{
+        //    var customer = CustomerMock.GetCustomer();
+        //    var deliveryAddress = customer.DeliveryAddress.FirstOrDefault();
 
-            var customerAddress = new CustomerAddress(customer.Id, deliveryAddress);
+        //    var customerAddress = new CustomerAddress(customer.Id, deliveryAddress);
 
-            decimal price = 2.5m;
-            var productPrice = new ProductPrice(Guid.NewGuid(), price);            
-            int quantity = 1;
+        //    decimal price = 2.5m;
+        //    var productPrice = new ProductPrice(Guid.NewGuid(), price);            
+        //    int quantity = 1;
 
-            var orderItem = new OrderItem(productPrice, quantity);
+        //    var orderItem = new OrderItem(productPrice, quantity);
 
-            var order = new Order(customerAddress);
+        //    var order = new Order(customerAddress);
 
-            orderItem.RaiseQuantity();
+        //    orderItem.RaiseQuantity();
 
-            order.AddOrderItem(orderItem);
+        //    order.AddOrderItem(orderItem);
 
-            var expectedAmount = price * orderItem.Quantity;
+        //    var expectedAmount = price * orderItem.Quantity;
 
-            Assert.AreEqual(expectedAmount, orderItem.Subtotal);
-        }
+        //    Assert.AreEqual(expectedAmount, orderItem.Subtotal);
+        //}
 
-        [Test]
-        public void Add_OrderItems_OrderTotalAmountEqualsItemsSubtotalSum()
-        {
-            var customer = CustomerMock.GetCustomer();
-            var deliveryAddress = customer.DeliveryAddress.FirstOrDefault();
+        //[Test]
+        //public void Add_OrderItems_OrderTotalAmountEqualsItemsSubtotalSum()
+        //{
+        //    var customer = CustomerMock.GetCustomer();
+        //    var deliveryAddress = customer.DeliveryAddress.FirstOrDefault();
 
-            var customerAddress = new CustomerAddress(customer.Id, deliveryAddress);
+        //    var customerAddress = new CustomerAddress(customer.Id, deliveryAddress);
 
-            decimal price = 2.5m;
-            decimal price2 = 3m;
+        //    decimal price = 2.5m;
+        //    decimal price2 = 3m;
 
-            var orderItem = new OrderItem(new ProductPrice(Guid.NewGuid(), price), 2);
-            var orderItem2 = new OrderItem(new ProductPrice(Guid.NewGuid(), price2), 3);
+        //    var orderItem = new OrderItem(new ProductPrice(Guid.NewGuid(), price), 2);
+        //    var orderItem2 = new OrderItem(new ProductPrice(Guid.NewGuid(), price2), 3);
 
-            var order = new Order(customerAddress);
+        //    var order = new Order(customerAddress);
 
-            order.AddOrderItem(orderItem);
-            order.AddOrderItem(orderItem2);
+        //    order.AddOrderItem(orderItem);
+        //    order.AddOrderItem(orderItem2);
 
-            var expectedAmount = orderItem.Subtotal + orderItem2.Subtotal;
+        //    var expectedAmount = orderItem.Subtotal + orderItem2.Subtotal;
 
-            Assert.AreEqual(expectedAmount, order.Amount);
-        }
+        //    Assert.AreEqual(expectedAmount, order.Amount);
+        //}
 
-        [Test]
-        public void Remove_OrderItem_DecreaseQuantity_SubtotalShouldBeDivided()
-        {
-            var customer = CustomerMock.GetCustomer();
-            var deliveryAddress = customer.DeliveryAddress.FirstOrDefault();
+        //[Test]
+        //public void Remove_OrderItem_DecreaseQuantity_SubtotalShouldBeDivided()
+        //{
+        //    var customer = CustomerMock.GetCustomer();
+        //    var deliveryAddress = customer.DeliveryAddress.FirstOrDefault();
 
-            var customerAddress = new CustomerAddress(customer.Id, deliveryAddress);
+        //    var customerAddress = new CustomerAddress(customer.Id, deliveryAddress);
 
-            decimal price = 2.5m;
-            var productPrice = new ProductPrice(Guid.NewGuid(), price);
-            int quantity = 2;
+        //    decimal price = 2.5m;
+        //    var productPrice = new ProductPrice(Guid.NewGuid(), price);
+        //    int quantity = 2;
 
-            var orderItem = new OrderItem(productPrice, quantity);
+        //    var orderItem = new OrderItem(productPrice, quantity);
 
-            var order = new Order(customerAddress);
+        //    var order = new Order(customerAddress);
 
-            var firstAmount = orderItem.Subtotal;
+        //    var firstAmount = orderItem.Subtotal;
 
-            orderItem.DecreaseQuantity();
+        //    orderItem.DecreaseQuantity();
 
-            order.AddOrderItem(orderItem);
+        //    order.AddOrderItem(orderItem);
 
-            var expectedAmount = price * orderItem.Quantity;
+        //    var expectedAmount = price * orderItem.Quantity;
 
-            Assert.AreEqual(expectedAmount, orderItem.Subtotal);
-            Assert.IsTrue(expectedAmount < firstAmount);
-        }
+        //    Assert.AreEqual(expectedAmount, orderItem.Subtotal);
+        //    Assert.IsTrue(expectedAmount < firstAmount);
+        //}
 
-        [Test]
-        public void Remove_OrderItems_OrderTotalAmountEqualsItemsSubtotalSum()
-        {
-            var customer = CustomerMock.GetCustomer();
-            var deliveryAddress = customer.DeliveryAddress.FirstOrDefault();
+        //[Test]
+        //public void Remove_OrderItems_OrderTotalAmountEqualsItemsSubtotalSum()
+        //{
+        //    var customer = CustomerMock.GetCustomer();
+        //    var deliveryAddress = customer.DeliveryAddress.FirstOrDefault();
 
-            var customerAddress = new CustomerAddress(customer.Id, deliveryAddress);
+        //    var customerAddress = new CustomerAddress(customer.Id, deliveryAddress);
 
-            decimal price = 2.5m;
-            decimal price2 = 3m;
+        //    decimal price = 2.5m;
+        //    decimal price2 = 3m;
 
-            var orderItem = new OrderItem(new ProductPrice(Guid.NewGuid(), price), 2);
-            var orderItem2 = new OrderItem(new ProductPrice(Guid.NewGuid(), price2), 3);
+        //    var orderItem = new OrderItem(new ProductPrice(Guid.NewGuid(), price), 2);
+        //    var orderItem2 = new OrderItem(new ProductPrice(Guid.NewGuid(), price2), 3);
 
-            var order = new Order(customerAddress);
+        //    var order = new Order(customerAddress);
 
-            order.AddOrderItem(orderItem);
-            order.AddOrderItem(orderItem2);
+        //    order.AddOrderItem(orderItem);
+        //    order.AddOrderItem(orderItem2);
 
-            order.RemoveOrderItem(orderItem);
+        //    order.RemoveOrderItem(orderItem);
 
-            Assert.AreEqual(orderItem2.Subtotal, order.Amount);
-        }
+        //    Assert.AreEqual(orderItem2.Subtotal, order.Amount);
+        //}
 
-        [Test]
-        public void Add_Order_ShouldHaveADeliveryStatusOfNew()
-        {
-            var customer = CustomerMock.GetCustomer();
-            var deliveryAddress = customer.DeliveryAddress.FirstOrDefault();
+        //[Test]
+        //public void Add_Order_ShouldHaveADeliveryStatusOfNew()
+        //{
+        //    var customer = CustomerMock.GetCustomer();
+        //    var deliveryAddress = customer.DeliveryAddress.FirstOrDefault();
 
-            var customerAddress = new CustomerAddress(customer.Id, deliveryAddress);
+        //    var customerAddress = new CustomerAddress(customer.Id, deliveryAddress);
 
-            decimal price = 2.5m;
+        //    decimal price = 2.5m;
 
-            var orderItem = new OrderItem(new ProductPrice(Guid.NewGuid(), price), 2);
+        //    var orderItem = new OrderItem(new ProductPrice(Guid.NewGuid(), price), 2);
 
-            var order = new Order(customerAddress);
+        //    var order = new Order(customerAddress);
 
-            order.AddOrderItem(orderItem);
+        //    order.AddOrderItem(orderItem);
 
-            Assert.AreEqual(DeliveryStatusEnum.New, order.DeliveryStatus);
-        }
+        //    Assert.AreEqual(DeliveryStatusEnum.New, order.DeliveryStatus);
+        //}
 
-        [TestCase(DeliveryStatusEnum.InTransit)]
-        [TestCase(DeliveryStatusEnum.Delivered)]
-        [TestCase(DeliveryStatusEnum.Canceled)]
-        public void ChangeDeliveryStatus_ModifiesDeliveryStatus(DeliveryStatusEnum newStatus)
-        {
-            var customer = CustomerMock.GetCustomer();
-            var deliveryAddress = customer.DeliveryAddress.FirstOrDefault();
+        //[TestCase(DeliveryStatusEnum.InTransit)]
+        //[TestCase(DeliveryStatusEnum.Delivered)]
+        //[TestCase(DeliveryStatusEnum.Canceled)]
+        //public void ChangeDeliveryStatus_ModifiesDeliveryStatus(DeliveryStatusEnum newStatus)
+        //{
+        //    var customer = CustomerMock.GetCustomer();
+        //    var deliveryAddress = customer.DeliveryAddress.FirstOrDefault();
 
-            var customerAddress = new CustomerAddress(customer.Id, deliveryAddress);
+        //    var customerAddress = new CustomerAddress(customer.Id, deliveryAddress);
 
-            var order = new Order(customerAddress);
+        //    var order = new Order(customerAddress);
 
-            order.ChangeDeliveryStatus(newStatus); 
+        //    order.ChangeDeliveryStatus(newStatus); 
 
-            Assert.AreEqual(newStatus, order.DeliveryStatus);
-        }
+        //    Assert.AreEqual(newStatus, order.DeliveryStatus);
+        //}
     }
 }

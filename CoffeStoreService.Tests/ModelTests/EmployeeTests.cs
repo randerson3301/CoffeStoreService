@@ -1,4 +1,9 @@
-﻿namespace CoffeStoreService.Tests.ModelTests
+﻿using CoffeStore.Models.Aggregates.EmployeeAggregate;
+using CoffeStore.Models.DomainExceptions;
+using CoffeStore.Models.Enums;
+using NUnit.Framework;
+
+namespace CoffeStoreService.Tests.ModelTests
 {
     internal class EmployeeTests
     {
