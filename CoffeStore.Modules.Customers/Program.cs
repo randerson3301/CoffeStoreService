@@ -48,14 +48,10 @@ builder.Services.AddScoped<IValidator<CreateCustomerAddressCommand>, CreateCusto
 builder.Services.AddScoped<IValidator<DeleteCustomerAddressCommand>, DeleteCustomerAddressCommandValidator>();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
 
-builder.Services.AddMassTransit(x => {
-    //x.AddConsumer<TestConsumer>();
-    //x.AddRequestClient<CustomerNewAccessAdded>(new Uri("queue:coffestore-messaging/customernewaccessaddedintegrationevent"));
-    
+builder.Services.AddMassTransit(x => {   
     x.UsingAzureServiceBus((context, cfg) =>
     {
-        cfg.Host(builder.Configuration.GetConnectionString("AzureServiceBusConnection"));
-        
+        cfg.Host(builder.Configuration.GetConnectionString("AzureServiceBusConnection"));        
         cfg.ConfigureEndpoints(context);
     }); 
 });
