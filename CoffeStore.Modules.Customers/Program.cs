@@ -17,6 +17,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using Microsoft.Extensions.Configuration;
+using MassTransit;
+using CoffeStore.Common.MessageModels;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,6 +47,18 @@ builder.Services.AddScoped<IValidator<CreateCustomerCommand>, CreateCustomerComm
 builder.Services.AddScoped<IValidator<CreateCustomerAddressCommand>, CreateCustomerAddressCommandValidator>();
 builder.Services.AddScoped<IValidator<DeleteCustomerAddressCommand>, DeleteCustomerAddressCommandValidator>();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
+
+builder.Services.AddMassTransit(x => {
+    //x.AddConsumer<TestConsumer>();
+    //x.AddRequestClient<CustomerNewAccessAdded>(new Uri("queue:coffestore-messaging/customernewaccessaddedintegrationevent"));
+    
+    x.UsingAzureServiceBus((context, cfg) =>
+    {
+        cfg.Host(builder.Configuration.GetConnectionString("AzureServiceBusConnection"));
+        
+        cfg.ConfigureEndpoints(context);
+    }); 
+});
 
 var app = builder.Build();
 

@@ -20,6 +20,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{E720
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeStore.Modules.Customers", "CoffeStore.Modules.Customers\CoffeStore.Modules.Customers.csproj", "{7F89C748-4596-477F-A0AC-4BC570BC09E2}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsumerPoc", "ConsumerPoc\ConsumerPoc.csproj", "{951C8816-6C5E-4971-BBE1-8518710ECC65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeStore.Common", "CoffeStore.Common\CoffeStore.Common.csproj", "{12EA97F5-93C5-4FD9-B1D4-0BBEE2ED952D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +50,14 @@ Global
 		{7F89C748-4596-477F-A0AC-4BC570BC09E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F89C748-4596-477F-A0AC-4BC570BC09E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F89C748-4596-477F-A0AC-4BC570BC09E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{951C8816-6C5E-4971-BBE1-8518710ECC65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{951C8816-6C5E-4971-BBE1-8518710ECC65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{951C8816-6C5E-4971-BBE1-8518710ECC65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{951C8816-6C5E-4971-BBE1-8518710ECC65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12EA97F5-93C5-4FD9-B1D4-0BBEE2ED952D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12EA97F5-93C5-4FD9-B1D4-0BBEE2ED952D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12EA97F5-93C5-4FD9-B1D4-0BBEE2ED952D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12EA97F5-93C5-4FD9-B1D4-0BBEE2ED952D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
