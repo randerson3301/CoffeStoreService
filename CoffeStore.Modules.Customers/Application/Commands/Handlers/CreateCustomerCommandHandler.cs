@@ -2,11 +2,9 @@
 using CoffeStore.Modules.Customers.Application.ErrorContext;
 using CoffeStore.Modules.Customers.Application.ViewModels;
 using CoffeStore.Modules.Customers.Domain.Contracts;
-using CoffeStore.Modules.Customers.Domain.DomainEvents;
 using CoffeStore.Modules.Customers.Resources;
 using FluentValidation;
 using MediatR;
-using System.Security.Cryptography;
 
 namespace CoffeStore.Modules.Customers.Application.Commands.Handlers
 {
