@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ConsumerPoc
 {
-    internal class CustomerNewAccessAddedConsumer : IConsumer<CustomerNewAccessAdded>
+    internal class CustomerNewAccessAddedConsumer : IConsumer<CustomerNewAccessAddedEvent>
     {
         private ILogger<CustomerNewAccessAddedConsumer> _logger;
 
@@ -17,7 +17,7 @@ namespace ConsumerPoc
             _logger = logger;
         }
 
-        public Task Consume(ConsumeContext<CustomerNewAccessAdded> context)
+        public Task Consume(ConsumeContext<CustomerNewAccessAddedEvent> context)
         {
             _logger.LogInformation($"Consumed with success: {context.Message}");
             return Task.CompletedTask;

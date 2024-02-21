@@ -1,21 +1,24 @@
-﻿using CoffeStore.Modules.Customers.Domain.DomainExceptions;
+﻿using CoffeStore.Common.Seedwork;
+using CoffeStore.Modules.Customers.Domain.DomainEvents;
+using CoffeStore.Modules.Customers.Domain.DomainExceptions;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CoffeStore.Modules.Customers.Domain
 {
-    internal sealed class Customer
+    internal sealed class Customer: Entity
     {
         private readonly Guid _id;
         private readonly ICollection<CustomerAddress> _deliveryAddresses;
-
+       
         public Guid Id => _id;
         public string FullName { get; }
         public DateOnly BirthDate { get; }
         public string Document { get; }
-        [NotMapped]
-        public IReadOnlyCollection<CustomerAddress> DeliveryAddresses => _deliveryAddresses.ToList().AsReadOnly();
         public string Email { get; }
 
+        [NotMapped]
+        public IReadOnlyCollection<CustomerAddress> DeliveryAddresses => _deliveryAddresses.ToList().AsReadOnly();
+      
         public Customer(string fullName, DateOnly birthDate, string document, string email, Guid id = default)
         {
             FullName = fullName;
@@ -48,6 +51,11 @@ namespace CoffeStore.Modules.Customers.Domain
 
             _deliveryAddresses.Remove(addressToRemove);
             return true;
+        }
+
+        public void AddAccess(string password)
+        {
+            AddDomainEvent(new CustomerAccessCreatedDomainEvent(_id, Email, password));
         }
     }
 

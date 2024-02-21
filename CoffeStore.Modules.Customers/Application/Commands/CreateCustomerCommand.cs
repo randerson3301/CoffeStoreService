@@ -5,7 +5,7 @@ using MediatR;
 
 namespace CoffeStore.Modules.Customers.Application.Commands
 {
-    internal class CreateCustomerCommand : IRequest<CustomerViewModel>
+    internal class CreateCustomerCommand : IRequest<CustomerViewModel?>
     {
         public required string Name { get; set; }
         public DateOnly BirthDate { get; set; }

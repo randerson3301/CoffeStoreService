@@ -1,38 +1,36 @@
-﻿using CoffeStore.Common.MessageModels;
-using CoffeStore.Modules.Customers.Application.Adapters;
-using CoffeStore.Modules.Customers.Application.Commands;
+﻿using CoffeStore.Modules.Customers.Application.Adapters;
 using CoffeStore.Modules.Customers.Application.ErrorContext;
 using CoffeStore.Modules.Customers.Application.ViewModels;
-using CoffeStore.Modules.Customers.Domain;
 using CoffeStore.Modules.Customers.Domain.Contracts;
+using CoffeStore.Modules.Customers.Domain.DomainEvents;
 using CoffeStore.Modules.Customers.Resources;
 using FluentValidation;
-using MassTransit;
 using MediatR;
+using System.Security.Cryptography;
 
 namespace CoffeStore.Modules.Customers.Application.Commands.Handlers
 {
-    internal class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, CustomerViewModel>
+    internal class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, CustomerViewModel?>
     {
         private ICustomerRepository _repository;
         private ICustomerAdapter _adapter;
         private ILogger<CreateCustomerCommandHandler> _logger;
         private readonly IValidator<CreateCustomerCommand> _validator;
         private readonly IErrorContext _errorContext;
-        private readonly IBus _bus;
+        private readonly IMediator _mediator;
 
         public CreateCustomerCommandHandler(ICustomerRepository repository, ICustomerAdapter adapter,
-            ILogger<CreateCustomerCommandHandler> logger, IValidator<CreateCustomerCommand> validator, IErrorContext errorContext, IBus bus)
+            ILogger<CreateCustomerCommandHandler> logger, IValidator<CreateCustomerCommand> validator, IErrorContext errorContext, IMediator mediator)
         {
             _repository = repository;
             _adapter = adapter;
             _logger = logger;
             _validator = validator;
             _errorContext = errorContext;
-            _bus = bus;
+            _mediator = mediator;
         }
 
-        public async Task<CustomerViewModel> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<CustomerViewModel?> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
         {
             var result = await _validator.ValidateAsync(request);
 
@@ -41,9 +39,9 @@ namespace CoffeStore.Modules.Customers.Application.Commands.Handlers
                 try
                 {
                     var domain = await _repository.AddAsync(_adapter.ConvertToDomain(request));
-                                        
-                    await _bus.Publish<CustomerNewAccessAdded>(new CustomerNewAccessAdded(domain.Id, domain.Email, request.Password), cancellationToken);
-                    
+
+                    await _mediator.Publish(domain.Events.Last(), cancellationToken);
+
                     return _adapter.ConvertToViewModel(domain);
                 }
                 catch (Exception error)

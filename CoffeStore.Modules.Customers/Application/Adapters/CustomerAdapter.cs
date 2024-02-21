@@ -1,11 +1,10 @@
-﻿using Azure.Core;
+﻿using CoffeStore.Common.MessageModels;
 using CoffeStore.Modules.Customers.Application.Commands;
 using CoffeStore.Modules.Customers.Application.ViewModels;
 using CoffeStore.Modules.Customers.Domain;
+using CoffeStore.Modules.Customers.Domain.DomainEvents;
 using CoffeStore.Modules.Customers.Seedwork;
 using Isopoh.Cryptography.Argon2;
-using System.Net;
-using System.Reflection.Emit;
 
 namespace CoffeStore.Modules.Customers.Application.Adapters
 {
@@ -17,6 +16,7 @@ namespace CoffeStore.Modules.Customers.Application.Adapters
             var newAddress = request.DeliveryAddress;
 
             domain.TryAddAddress(ConvertToDomain(domain.Id, newAddress));
+            domain.AddAccess(Argon2.Hash(request.Password));
 
             return domain;
         }
@@ -33,6 +33,11 @@ namespace CoffeStore.Modules.Customers.Application.Adapters
             var customerAddress = new CustomerAddress();
             customerAddress.Set(customerId, address);
             return customerAddress;
+        }
+
+        public CustomerNewAccessAddedEvent ConvertToIntegrationEvent(CustomerAccessCreatedDomainEvent domainEvent)
+        {
+            return new CustomerNewAccessAddedEvent(domainEvent.CustomerId, domainEvent.Email, domainEvent.Password);
         }
 
         public CustomerViewModel ConvertToViewModel(Customer domain)
