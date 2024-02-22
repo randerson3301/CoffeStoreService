@@ -4,6 +4,7 @@ using CoffeStore.Modules.Customers.Application.Queries;
 using CoffeStore.Modules.Customers.Seedwork;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace CoffeStore.Modules.Customers.Application
 {
@@ -20,8 +21,8 @@ namespace CoffeStore.Modules.Customers.Application
 
                     return Results.Created("/customer", result);
                 }).WithOpenApi()
-                .Produces(201)
-                .Produces(400);
+                .Produces((int)HttpStatusCode.Created)
+                .Produces((int)HttpStatusCode.BadRequest);
 
 
             app.MapPost("/customer/{id}/address",
@@ -44,9 +45,9 @@ namespace CoffeStore.Modules.Customers.Application
 
                     return Results.Ok(result);
                 }).WithOpenApi()
-                .Produces(201)
-                .Produces(404)
-                .Produces(400);
+                .Produces((int)HttpStatusCode.OK)
+                .Produces((int)HttpStatusCode.NotFound)
+                .Produces((int)HttpStatusCode.BadRequest);
 
             app.MapDelete("/customer/{id}/address",
                 async (Guid id, [FromBody] DeleteCustomerAddressCommand addressToRemove, IMediator mediator, IErrorContext errorContext) =>
@@ -69,9 +70,9 @@ namespace CoffeStore.Modules.Customers.Application
                     return Results.NoContent();
 
                 }).WithOpenApi()
-                .Produces(204)
-                .Produces(404)
-                .Produces(400);
+                .Produces((int)HttpStatusCode.NoContent)
+                .Produces((int)HttpStatusCode.NotFound)
+                .Produces((int)HttpStatusCode.BadRequest);
 
             app.MapGet("/customer/{id}", async (Guid id, IMediator mediator, IErrorContext errorContext) =>
             {
@@ -90,8 +91,8 @@ namespace CoffeStore.Modules.Customers.Application
 
                 return Results.Ok(result);
             }).WithOpenApi()
-            .Produces(200)
-            .Produces(404);
+            .Produces((int)HttpStatusCode.OK)
+            .Produces((int)HttpStatusCode.NotFound);
         }
     }
 }

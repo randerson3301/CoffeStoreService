@@ -21,43 +21,7 @@ namespace CoffeStoreService.Tests.Mocks
                 Document = "70152246070",
                 Email = "john.doe@example.com",
             };
-        }
-
-
-        //public static CreateCustomerRequest GetDto()
-        //{
-        //    return new CreateCustomerRequest()
-        //    {
-        //        Name = "John Doe",
-        //        BirthDate = new DateOnly(2000, 1, 1),
-        //        Document = "70152246070",
-        //        Email = "john.doe@example.com",
-        //        Password = "Password123",               
-        //        Id = Guid.NewGuid(),
-        //    };
-        //}
-
-        //public static CreateCustomerRequest GetDtoWithAddress()
-        //{
-        //    return new CreateCustomerRequest()
-        //    {
-        //        Name = "John Doe",
-        //        BirthDate = new DateOnly(2000, 1, 1),
-        //        Document = "70152246070",
-        //        Email = "john.doe@example.com",
-        //        Password = "Password123",
-        //        DeliveryAddress = new CustomerAddressDto
-        //        {
-        //            ZipCode = "12345678",
-        //            Address = "123 Main St",
-        //            Number = 123,
-        //            Neighborhood = "Suburb",
-        //            City = "City",
-        //            State = "ST",
-        //        },
-        //        Id = Guid.NewGuid(),
-        //    };
-        //}
+        }        
 
         public static DeliveryAddress GetCustomerAddress()
         {
