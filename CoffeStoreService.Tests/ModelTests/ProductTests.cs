@@ -1,4 +1,4 @@
-﻿using CoffeStore.Models.Aggregates.ProductAggregate;
+﻿using CoffeStore.Modules.Products.Domain;
 using NUnit.Framework;
 
 namespace CoffeStoreService.Tests.ModelTests
@@ -46,24 +46,7 @@ namespace CoffeStoreService.Tests.ModelTests
             product.Disable();
 
             Assert.IsFalse(product.IsAvailable);
-        }
-
-        //[Test]
-        //public void Cannot_AddReview_To_DisabledProduct()
-        //{
-        //    var product = new Product("produto", "path", 8.5m, "test", Guid.NewGuid());
-
-        //    product.Disable();
-
-        //    string expectedMessage = "Cannot review an unavailable product!";
-
-        //    string? actualExceptionMessage = Assert.Throws<ReviewUnavailableProductException>(() =>
-        //    {
-        //        product.AddReview(new ProductReview(Guid.NewGuid(), "muito top", 5));
-        //    }).Message;
-
-        //    Assert.AreEqual(expectedMessage, actualExceptionMessage);
-        //}
+        }       
 
         [Test]
         public void Enable_DisabledProduct_TurnsProductAvailableAgain()
