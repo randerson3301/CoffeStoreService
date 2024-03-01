@@ -7,10 +7,8 @@ namespace CoffeStore.Modules.Customers.Domain
 {
     internal sealed class Customer: Entity
     {
-        private readonly Guid _id;
         private readonly ICollection<CustomerAddress> _deliveryAddresses;
        
-        public Guid Id => _id;
         public string FullName { get; }
         public DateOnly BirthDate { get; }
         public string Document { get; }
@@ -19,7 +17,7 @@ namespace CoffeStore.Modules.Customers.Domain
         [NotMapped]
         public IReadOnlyCollection<CustomerAddress> DeliveryAddresses => _deliveryAddresses.ToList().AsReadOnly();
       
-        public Customer(string fullName, DateOnly birthDate, string document, string email, Guid id = default)
+        public Customer(string fullName, DateOnly birthDate, string document, string email)
         {
             FullName = fullName;
             BirthDate = birthDate;
@@ -27,7 +25,6 @@ namespace CoffeStore.Modules.Customers.Domain
             Email = email;
 
             _deliveryAddresses = new List<CustomerAddress>();
-            _id = (id == Guid.Empty) ? Guid.NewGuid() : id;
         }
 
 
@@ -55,7 +52,7 @@ namespace CoffeStore.Modules.Customers.Domain
 
         public void AddAccess(string password)
         {
-            AddDomainEvent(new CustomerAccessCreatedDomainEvent(_id, Email, password));
+            AddDomainEvent(new CustomerAccessCreatedDomainEvent(Id, Email, password));
         }
     }
 

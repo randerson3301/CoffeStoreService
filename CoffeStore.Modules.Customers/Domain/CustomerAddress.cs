@@ -3,7 +3,7 @@ using System;
 
 namespace CoffeStore.Modules.Customers.Domain
 {
-    public sealed record CustomerAddress
+    internal sealed record CustomerAddress
     {
         public void Set(Guid customerId, DeliveryAddress deliveryAddress)
         {
