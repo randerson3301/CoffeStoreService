@@ -1,0 +1,6 @@
+@CoffeStore.Modules.Products_HostAddress = http://localhost:5038
+
+GET {{CoffeStore.Modules.Products_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
