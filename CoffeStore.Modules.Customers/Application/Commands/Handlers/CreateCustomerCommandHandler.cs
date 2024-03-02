@@ -1,5 +1,5 @@
-﻿using CoffeStore.Modules.Customers.Application.Adapters;
-using CoffeStore.Modules.Customers.Application.ErrorContext;
+﻿using CoffeStore.Common.ErrorContext;
+using CoffeStore.Modules.Customers.Application.Adapters;
 using CoffeStore.Modules.Customers.Application.ViewModels;
 using CoffeStore.Modules.Customers.Domain.Contracts;
 using CoffeStore.Modules.Customers.Resources;

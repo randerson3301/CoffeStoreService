@@ -1,5 +1,5 @@
-﻿using CoffeStore.Modules.Customers.Application.Commands;
-using CoffeStore.Modules.Customers.Application.ErrorContext;
+﻿using CoffeStore.Common.ErrorContext;
+using CoffeStore.Modules.Customers.Application.Commands;
 using CoffeStore.Modules.Customers.Application.Queries;
 using CoffeStore.Modules.Customers.Seedwork;
 using MediatR;

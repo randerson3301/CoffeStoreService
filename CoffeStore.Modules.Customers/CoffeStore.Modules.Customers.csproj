@@ -8,10 +8,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Remove="Application\Helpers\ValidationHelper.cs~RFa8cefd1.TMP" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="FluentValidation" Version="11.8.0" />
 		<PackageReference Include="Isopoh.Cryptography.Argon2" Version="2.0.0" />
 		<PackageReference Include="MassTransit" Version="8.1.3" />

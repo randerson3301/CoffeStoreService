@@ -22,12 +22,7 @@ namespace CoffeStore.Modules.Customers.Infra.Repositories
             await db.Customers.AddAsync(customer);
             await db.SaveChangesAsync();
             return customer;
-        }        
-
-        public Task<Customer> GetByEmail(string email)
-        {
-            throw new NotImplementedException();
-        }
+        }                
 
         public async Task<Customer?> GetByIdAsync(Guid id)
         {

@@ -1,5 +1,5 @@
-﻿using CoffeStore.Modules.Customers.Application.Commands;
-using CoffeStore.Modules.Customers.Application.Helpers;
+﻿using CoffeStore.Common.Helpers;
+using CoffeStore.Modules.Customers.Application.Commands;
 using FluentValidation;
 using System.Globalization;
 

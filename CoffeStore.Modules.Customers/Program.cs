@@ -1,7 +1,6 @@
 using CoffeStore.Modules.Customers.Application;
 using CoffeStore.Modules.Customers.Application.Adapters;
 using CoffeStore.Modules.Customers.Application.Commands;
-using CoffeStore.Modules.Customers.Application.ErrorContext;
 using CoffeStore.Modules.Customers.Application.Queries;
 using CoffeStore.Modules.Customers.Application.Validators;
 using CoffeStore.Modules.Customers.Domain.Contracts;
@@ -19,6 +18,7 @@ using System.Reflection;
 using Microsoft.Extensions.Configuration;
 using MassTransit;
 using CoffeStore.Common.MessageModels;
+using CoffeStore.Common.ErrorContext;
 
 var builder = WebApplication.CreateBuilder(args);
 
