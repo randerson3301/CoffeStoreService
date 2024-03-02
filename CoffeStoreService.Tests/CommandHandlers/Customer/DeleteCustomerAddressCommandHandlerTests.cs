@@ -16,7 +16,7 @@ using NSubstitute.ReturnsExtensions;
 using CoffeStore.Modules.Customers.Application.Adapters;
 using CoffeStore.Modules.Customers.Application.ViewModels;
 using CoffeStore.Modules.Customers.Domain;
-using CoffeStore.Modules.Customers.Application.ErrorContext;
+using CoffeStore.Common.ErrorContext;
 
 namespace CoffeStore.Tests.CommandHandlers
 {

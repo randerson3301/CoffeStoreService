@@ -1,7 +1,7 @@
-﻿using CoffeStore.Modules.Customers.Application.Adapters;
+﻿using CoffeStore.Common.ErrorContext;
+using CoffeStore.Modules.Customers.Application.Adapters;
 using CoffeStore.Modules.Customers.Application.Commands;
 using CoffeStore.Modules.Customers.Application.Commands.Handlers;
-using CoffeStore.Modules.Customers.Application.ErrorContext;
 using CoffeStore.Modules.Customers.Application.Validators;
 using CoffeStore.Modules.Customers.Application.ViewModels;
 using CoffeStore.Modules.Customers.Domain;

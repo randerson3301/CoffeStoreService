@@ -18,7 +18,7 @@ using CoffeStoreService.Tests.Mocks;
 using CoffeStore.Modules.Customers.Application.Queries;
 using CoffeStore.Modules.Customers.Application.ViewModels;
 using NSubstitute.ReturnsExtensions;
-using CoffeStore.Modules.Customers.Application.ErrorContext;
+using CoffeStore.Common.ErrorContext;
 
 namespace CoffeStore.Tests.QueryHandlers
 {
