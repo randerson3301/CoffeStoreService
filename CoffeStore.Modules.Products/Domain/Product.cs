@@ -1,6 +1,8 @@
-﻿namespace CoffeStore.Modules.Products.Domain
+﻿using CoffeStore.Common.Seedwork;
+
+namespace CoffeStore.Modules.Products.Domain
 {
-    internal sealed class Product
+    internal sealed class Product: Entity
     {
         public Product(string productName, string imagePath, decimal price, string description, Guid addedBy)
         {
@@ -12,7 +14,6 @@
             IsAvailable = true;
             CreatedAt = DateTime.Now;
             _productReviews = new List<ProductReview>();
-
         }
 
         private readonly ICollection<ProductReview> _productReviews;      
