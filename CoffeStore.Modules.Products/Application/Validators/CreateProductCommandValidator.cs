@@ -5,7 +5,7 @@ using System.Globalization;
 
 namespace CoffeStore.Modules.Products.Application.Validators
 {
-    public class CreateProductCommandValidator: AbstractValidator<CreateProductCommand>
+    internal class CreateProductCommandValidator: AbstractValidator<CreateProductCommand>
     {
         public CreateProductCommandValidator()
         {

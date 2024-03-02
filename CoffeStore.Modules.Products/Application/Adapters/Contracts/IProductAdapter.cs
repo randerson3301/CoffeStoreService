@@ -8,5 +8,6 @@ namespace CoffeStore.Modules.Products.Application.Adapters.Contracts
     {
         Product ConvertToDomain(CreateProductCommand request);
         ProductViewModel ConvertToViewModel(Product domain);
+        IReadOnlyCollection<ProductViewModel> ConvertToViewModel(ICollection<Product> products);
     }
 }

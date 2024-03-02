@@ -2,7 +2,8 @@
 
 namespace CoffeStore.Modules.Products.Domain.Contracts
 {
-    internal interface IProductRepository: IRepository<Product>
+    internal interface IProductRepository : IRepository<Product>
     {
+        Task<ICollection<Product>> GetAvailableProductsAsync();
     }
 }

@@ -47,6 +47,8 @@ namespace CoffeStore.Tests.CommandHandlers.Products
                 Description = "cafezin bão"
             };
 
+            _adapter.ConvertToViewModel(Arg.Any<Product>()).Returns(new ProductViewModel() { Id = Guid.NewGuid(), Description = string.Empty, ImagePath = string.Empty, Title = string.Empty});
+            _repository.AddAsync(Arg.Any<Product>()).Returns(new Product(request.Name, request.ImagePath, request.Price, request.Description, Guid.NewGuid()));
             var result = await _handler.Handle(request, new CancellationToken());
             
             Assert.IsNotNull(result);
@@ -71,7 +73,7 @@ namespace CoffeStore.Tests.CommandHandlers.Products
         }
 
         [Test]
-        public async Task Add_Product_Repository_Throws_Exception_Returns_Null()
+        public void Add_Product_Repository_Throws_Exception()
         {
             var request = new CreateProductCommand()
             {
@@ -81,10 +83,10 @@ namespace CoffeStore.Tests.CommandHandlers.Products
                 Description = "cafezin bão"
             };
 
-             _repository.AddAsync(Arg.Any<Product>()).Throws<Exception>();
+            _repository.AddAsync(Arg.Any<Product>()).Throws<Exception>();
 
             string? errorMessage = Assert.ThrowsAsync<Exception>(async () => await _handler.Handle(request, new CancellationToken())).Message;
-            
+
             _logger.Received().LogError(errorMessage);
         }
     }
