@@ -2,11 +2,11 @@
 {
     public class ProductViewModel
     {
-        public required Guid Id { get; set; }
-        public required string ImagePath { get; set; }
-        public required string Title { get; set; }
+        public Guid Id { get; set; }
+        public string ImagePath { get; set; } = string.Empty;
+        public string Title { get; set; } = string.Empty;
         public double RateNumber { get; set; }
         public decimal Price { get; set; }
-        public required string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
     }
 }

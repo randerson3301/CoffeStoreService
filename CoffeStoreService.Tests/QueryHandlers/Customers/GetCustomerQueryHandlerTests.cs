@@ -20,7 +20,7 @@ using CoffeStore.Modules.Customers.Application.ViewModels;
 using NSubstitute.ReturnsExtensions;
 using CoffeStore.Common.ErrorContext;
 
-namespace CoffeStore.Tests.QueryHandlers
+namespace CoffeStore.Tests.QueryHandlers.Customers
 {
     internal class GetCustomerQueryHandlerTests
     {
