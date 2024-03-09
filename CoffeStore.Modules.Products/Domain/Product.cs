@@ -1,4 +1,5 @@
 ﻿using CoffeStore.Common.Seedwork;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CoffeStore.Modules.Products.Domain
 {
@@ -25,7 +26,8 @@ namespace CoffeStore.Modules.Products.Domain
         public Guid AddedBy { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public double AverageRate => _productReviews.Any() ? _productReviews.Average(r => r.RateNumber) : 0;
-
+        
+        [NotMapped]
         public IReadOnlyCollection<ProductReview> ProductReviews => _productReviews.ToList().AsReadOnly();        
 
         public void AddReview(ProductReview review)

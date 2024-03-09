@@ -5,7 +5,7 @@ namespace CoffeStore.Modules.Products.Application.Queries
 {
     internal class GetProductsByFiltersQuery: IRequest<IReadOnlyCollection<ProductViewModel>>
     {
-        public GetProductsByFiltersQuery(bool onlyAvailable = false)
+        public GetProductsByFiltersQuery(bool onlyAvailable = true)
         {
             OnlyAvailable = onlyAvailable;
         }
