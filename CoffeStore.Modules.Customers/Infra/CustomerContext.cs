@@ -1,10 +1,6 @@
 ﻿using CoffeStore.Modules.Customers.Domain;
-using CoffeStore.Modules.Customers.Infra.PersistenceModels;
-using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace CoffeStore.Modules.Customers.Infra
 {
