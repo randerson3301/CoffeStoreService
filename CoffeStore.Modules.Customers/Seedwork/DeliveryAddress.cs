@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace CoffeStore.Modules.Customers.Seedwork
+﻿namespace CoffeStore.Modules.Customers.Seedwork
 {
     public struct DeliveryAddress
     {

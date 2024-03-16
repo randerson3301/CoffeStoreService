@@ -1,4 +1,13 @@
+using CoffeStore.Common.ErrorContext;
+using CoffeStore.Modules.Products.Application;
+using CoffeStore.Modules.Products.Application.Adapters;
+using CoffeStore.Modules.Products.Application.Adapters.Contracts;
+using CoffeStore.Modules.Products.Application.Commands;
+using CoffeStore.Modules.Products.Application.Validators;
+using CoffeStore.Modules.Products.Domain.Contracts;
 using CoffeStore.Modules.Products.Infra;
+using CoffeStore.Modules.Products.Infra.Repositories;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +29,13 @@ builder.Services.AddDbContext<ProductContext>(options =>
         });
 });
 
+builder.Services.AddSingleton<IProductAdapter, ProductAdapter>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IErrorContext, ErrorContext>();
+
+builder.Services.AddScoped<IValidator<CreateProductCommand>, CreateProductCommandValidator>();
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -31,29 +47,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
+ProductEndpoints.Map(app);
 
 app.Run();
-
-internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

@@ -5,9 +5,6 @@ using CoffeStore.Modules.Products.Domain;
 using CoffeStore.Modules.Products.Domain.Contracts;
 using FluentValidation;
 using MediatR;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CoffeStore.Modules.Products.Application.Commands.Handlers
 {
