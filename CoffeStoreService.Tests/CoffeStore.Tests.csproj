@@ -19,8 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CoffeStore.EcommerceApp\CoffeStore.EcommerceApp.csproj" />
-    <ProjectReference Include="..\CoffeStore.Models\CoffeStore.Models.csproj" />
     <ProjectReference Include="..\CoffeStore.Modules.Customers\CoffeStore.Modules.Customers.csproj" />
     <ProjectReference Include="..\CoffeStore.Modules.Products\CoffeStore.Modules.Products.csproj" />
   </ItemGroup>

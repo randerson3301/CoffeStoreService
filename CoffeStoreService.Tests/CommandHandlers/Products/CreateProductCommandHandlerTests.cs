@@ -6,6 +6,7 @@ using CoffeStore.Modules.Products.Application.Validators;
 using CoffeStore.Modules.Products.Application.ViewModels;
 using CoffeStore.Modules.Products.Domain;
 using CoffeStore.Modules.Products.Domain.Contracts;
+using CoffeStore.Tests.Mocks;
 using FluentValidation;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
@@ -39,13 +40,7 @@ namespace CoffeStore.Tests.CommandHandlers.Products
         [Test]
         public async Task Add_NewProduct_Returns_ViewModel()
         {
-            var request = new CreateProductCommand()
-            {
-                Name = "Qualquer um",
-                ImagePath = "<<imagem>>",
-                Price = 10.65m,
-                Description = "cafezin bão"
-            };
+            var request = ProductMock.GetCommand();
 
             _adapter.ConvertToViewModel(Arg.Any<Product>()).Returns(new ProductViewModel() { Id = Guid.NewGuid(), Description = string.Empty, ImagePath = string.Empty, Title = string.Empty});
             _repository.AddAsync(Arg.Any<Product>()).Returns(new Product(request.Name, request.ImagePath, request.Price, request.Description, Guid.NewGuid()));
@@ -58,13 +53,8 @@ namespace CoffeStore.Tests.CommandHandlers.Products
         [Test]
         public async Task Add_InvalidProduct_Returns_Null()
         {
-            var request = new CreateProductCommand()
-            {
-                Name = "",
-                ImagePath = "",
-                Price = 0,
-                Description = ""
-            };
+            var request = ProductMock.GetCommand();
+            request.Name = string.Empty;
 
             var result = await _handler.Handle(request, new CancellationToken());
 
@@ -75,13 +65,7 @@ namespace CoffeStore.Tests.CommandHandlers.Products
         [Test]
         public void Add_Product_Repository_Throws_Exception()
         {
-            var request = new CreateProductCommand()
-            {
-                Name = "Qualquer um",
-                ImagePath = "<<imagem>>",
-                Price = 10.65m,
-                Description = "cafezin bão"
-            };
+            var request = ProductMock.GetCommand();
 
             _repository.AddAsync(Arg.Any<Product>()).Throws<Exception>();
 
