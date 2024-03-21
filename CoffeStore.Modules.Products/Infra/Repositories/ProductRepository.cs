@@ -2,6 +2,8 @@
 using CoffeStore.Modules.Products.Domain;
 using CoffeStore.Modules.Products.Domain.Contracts;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace CoffeStore.Modules.Products.Infra.Repositories
 {
@@ -27,9 +29,28 @@ namespace CoffeStore.Modules.Products.Infra.Repositories
                              .FirstOrDefaultAsync();
         }
 
-        public Task<ICollection<Product>> GetProductsByFiltersAsync(GetProductsByFiltersQuery query)
+        public async Task<ICollection<Product>> GetProductsByFiltersAsync(GetProductsByFiltersQuery query)
         {
-            throw new NotImplementedException();
+            var filters = new List<Func<Product, bool>>();
+
+            if (query.OnlyAvailable)
+            {
+                filters.Add(p => p.IsAvailable);
+            }            
+
+            var products = new List<Product>();
+
+            foreach (var filter in filters)
+            {
+                products.AddRange(db.Products.Where(filter));
+            }
+
+            if (!filters.Any())
+            {
+                products = await db.Products.ToListAsync();
+            }
+
+            return products;
         }
 
         public async Task UpdateAsync(Product data)
