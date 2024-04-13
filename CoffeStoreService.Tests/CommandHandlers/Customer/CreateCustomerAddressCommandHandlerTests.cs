@@ -17,8 +17,8 @@ using CoffeStore.Modules.Customers.Domain.Contracts;
 using CoffeStore.Modules.Customers.Application.Validators;
 using CoffeStore.Modules.Customers.Application.ViewModels;
 using NSubstitute.ReturnsExtensions;
-using CoffeStore.Modules.Customers.Seedwork;
 using CoffeStore.Common.ErrorContext;
+using CoffeStore.Common.Seedwork;
 
 namespace CoffeStore.Tests.CommandHandlers
 {

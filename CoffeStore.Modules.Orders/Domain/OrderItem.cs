@@ -4,7 +4,7 @@
     {
         public Guid ProductId { get; }
         public decimal Price { get; }
-        public int Quantity { get; }
+        public int Quantity { get; set; }
         public decimal Subtotal => Price * Quantity;
         public short RatingNumber { get; private set; }
 

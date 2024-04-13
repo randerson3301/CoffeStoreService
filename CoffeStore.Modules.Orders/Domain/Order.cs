@@ -7,17 +7,16 @@ namespace CoffeStore.Modules.Orders.Domain
     {
         public Guid CustomerId { get; }
         public DeliveryAddress CustomerAddress { get; }               
-        public decimal Amount => OrderItems.Sum(i => i.Price);
+        public decimal Amount => OrderItems.Sum(i => i.Subtotal);
         public DeliveryStatusEnum DeliveryStatus { get; private set; }
         public DateTime CreatedAt { get; set; }
 
         private List<OrderItem> _orderItems;
-        public IReadOnlyCollection<OrderItem> OrderItems { get; }
+        public IReadOnlyCollection<OrderItem> OrderItems => _orderItems;
 
         public Order(DeliveryAddress customerAddress, Guid customerId)
         {
             CustomerAddress = customerAddress;
-            OrderItems = new List<OrderItem>();
             DeliveryStatus = DeliveryStatusEnum.New;
             CustomerId = customerId;
             CreatedAt = DateTime.Now;

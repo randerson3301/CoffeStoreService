@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CoffeStore.Modules.Customers\CoffeStore.Modules.Customers.csproj" />
+    <ProjectReference Include="..\CoffeStore.Modules.Orders\CoffeStore.Modules.Orders.csproj" />
     <ProjectReference Include="..\CoffeStore.Modules.Products\CoffeStore.Modules.Products.csproj" />
   </ItemGroup>
 

@@ -1,6 +1,5 @@
-﻿using CoffeStore.Modules.Customers.Domain;
-using CoffeStore.Modules.Customers.Domain.DomainExceptions;
-using CoffeStore.Modules.Customers.Seedwork;
+﻿using CoffeStore.Common.Seedwork;
+using CoffeStore.Modules.Customers.Domain;
 using CoffeStoreService.Tests.Mocks;
 using NUnit.Framework;
 
