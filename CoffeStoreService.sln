@@ -24,7 +24,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsumerPoc", "ConsumerPoc\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeStore.Common", "CoffeStore.Common\CoffeStore.Common.csproj", "{12EA97F5-93C5-4FD9-B1D4-0BBEE2ED952D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeStore.Modules.Products", "CoffeStore.Modules.Products\CoffeStore.Modules.Products.csproj", "{2073C3F4-8BC3-4674-A659-291E4518604B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeStore.Modules.Products", "CoffeStore.Modules.Products\CoffeStore.Modules.Products.csproj", "{2073C3F4-8BC3-4674-A659-291E4518604B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeStore.Modules.Orders", "CoffeStore.Modules.Orders\CoffeStore.Modules.Orders.csproj", "{8A7F2965-5355-4433-A43A-2D1B23A508B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,6 +66,10 @@ Global
 		{2073C3F4-8BC3-4674-A659-291E4518604B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2073C3F4-8BC3-4674-A659-291E4518604B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2073C3F4-8BC3-4674-A659-291E4518604B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A7F2965-5355-4433-A43A-2D1B23A508B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A7F2965-5355-4433-A43A-2D1B23A508B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A7F2965-5355-4433-A43A-2D1B23A508B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A7F2965-5355-4433-A43A-2D1B23A508B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +77,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{7F89C748-4596-477F-A0AC-4BC570BC09E2} = {E720F357-70F4-4E94-A252-28C731F5907D}
 		{2073C3F4-8BC3-4674-A659-291E4518604B} = {E720F357-70F4-4E94-A252-28C731F5907D}
+		{8A7F2965-5355-4433-A43A-2D1B23A508B8} = {E720F357-70F4-4E94-A252-28C731F5907D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {206AFF75-4F33-41AA-AB74-FE86E14E414A}
