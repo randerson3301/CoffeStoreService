@@ -1,9 +1,6 @@
-﻿using CoffeStore.Modules.Customers;
-using CoffeStore.Modules.Customers.Domain;
+﻿using CoffeStore.Modules.Customers.Domain;
 using CoffeStore.Modules.Customers.Domain.Contracts;
-using CoffeStore.Modules.Customers.Seedwork;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace CoffeStore.Modules.Customers.Infra.Repositories
 {

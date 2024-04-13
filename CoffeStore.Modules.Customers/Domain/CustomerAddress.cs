@@ -1,4 +1,4 @@
-﻿using CoffeStore.Modules.Customers.Seedwork;
+﻿using CoffeStore.Common.Seedwork;
 using System;
 
 namespace CoffeStore.Modules.Customers.Domain

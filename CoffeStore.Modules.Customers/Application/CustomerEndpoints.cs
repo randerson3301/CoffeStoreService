@@ -1,7 +1,6 @@
 ﻿using CoffeStore.Common.ErrorContext;
 using CoffeStore.Modules.Customers.Application.Commands;
 using CoffeStore.Modules.Customers.Application.Queries;
-using CoffeStore.Modules.Customers.Seedwork;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;

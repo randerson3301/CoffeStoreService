@@ -1,4 +1,4 @@
-﻿using CoffeStore.Modules.Customers.Seedwork;
+﻿using CoffeStore.Common.Seedwork;
 
 namespace CoffeStore.Modules.Customers.Application.ViewModels
 {

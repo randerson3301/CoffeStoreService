@@ -1,4 +1,4 @@
-﻿namespace CoffeStore.Modules.Customers.Seedwork
+﻿namespace CoffeStore.Common.Seedwork
 {
     public struct DeliveryAddress
     {
