@@ -1,5 +1,4 @@
-﻿using MediatR;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
 namespace CoffeStore.Common.Seedwork
 {

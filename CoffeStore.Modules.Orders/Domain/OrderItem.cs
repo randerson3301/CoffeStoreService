@@ -4,11 +4,11 @@
     {
         public Guid ProductId { get; }
         public decimal Price { get; }
-        public int Quantity { get; set; }
+        public uint Quantity { get; set; }
         public decimal Subtotal => Price * Quantity;
         public short RatingNumber { get; private set; }
 
-        public OrderItem(Guid productId, decimal price, int quantity)
+        public OrderItem(Guid productId, decimal price, uint quantity)
         {
             Quantity = quantity;
             ProductId = productId;

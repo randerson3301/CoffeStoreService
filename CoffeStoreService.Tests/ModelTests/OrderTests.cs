@@ -75,7 +75,7 @@ namespace CoffeStoreService.Tests.ModelTests
             var customer = CustomerMock.GetCustomer();
             var deliveryAddress = CustomerMock.GetCustomerAddress();
             decimal price = 2.5m;
-            int quantity = 2;
+            uint quantity = 2;
             var orderItem = new OrderItem(Guid.NewGuid(), price, quantity);
             var orderItems = new List<OrderItem>();
             var order = new Order(deliveryAddress, customer.Id);
