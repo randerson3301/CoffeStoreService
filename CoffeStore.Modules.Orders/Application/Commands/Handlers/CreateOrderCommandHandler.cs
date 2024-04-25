@@ -5,10 +5,11 @@ using CoffeStore.Modules.Orders.Domain;
 using CoffeStore.Modules.Orders.Domain.Contracts;
 using FluentValidation;
 using MediatR;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CoffeStore.Modules.Orders.Application.Commands.Handlers
 {
-    internal class CreateOrderCommandHandler: IRequestHandler<CreateOrderCommand, OrderViewModel>
+    internal class CreateOrderCommandHandler: IRequestHandler<CreateOrderCommand, OrderViewModel?>
     {
         private IOrderAdapter _adapter;
         private IValidator<CreateOrderCommand> _validator;
@@ -25,11 +26,28 @@ namespace CoffeStore.Modules.Orders.Application.Commands.Handlers
             _repository = repository;
         }
 
-        public async Task<OrderViewModel> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
+        public async Task<OrderViewModel?> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
-            Order order = await _repository.AddAsync(_adapter.ConvertToDomain(request));
+            var result = await _validator.ValidateAsync(request);
 
-            return _adapter.ConvertToViewModel(order);
+            if (result.IsValid)
+            {
+                try
+                {
+                    //TODO: Validar se cliente existe
+                    //TODO: Validar se produto existe
+                    Order order = await _repository.AddAsync(_adapter.ConvertToDomain(request));
+                    return _adapter.ConvertToViewModel(order);
+                } 
+                catch (Exception error)
+                {
+                    _logger.LogError(error.Message);
+                    throw;
+                }
+            }
+
+            _errorContext.AddError(ErrorType.FailedValidation, result.Errors.Select(e => e.ErrorMessage).ToArray());
+            return null;
         }
     }
 }

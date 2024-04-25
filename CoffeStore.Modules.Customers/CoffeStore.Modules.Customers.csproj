@@ -45,5 +45,6 @@
 
 		<PropertyGroup>
 			<InvariantGlobalization>false</InvariantGlobalization>
+			<PublishAot>true</PublishAot>
 		</PropertyGroup>
 </Project>
