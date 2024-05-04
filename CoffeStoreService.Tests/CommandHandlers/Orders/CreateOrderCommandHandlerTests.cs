@@ -3,11 +3,11 @@ using CoffeStore.Modules.Orders.Application.Adapters;
 using CoffeStore.Modules.Orders.Application.Commands;
 using CoffeStore.Modules.Orders.Application.Commands.Handlers;
 using CoffeStore.Modules.Orders.Application.Dtos;
+using CoffeStore.Modules.Orders.Application.ExternalServices.Contracts;
 using CoffeStore.Modules.Orders.Application.Validators;
 using CoffeStore.Modules.Orders.Application.ViewModels;
 using CoffeStore.Modules.Orders.Domain;
 using CoffeStore.Modules.Orders.Domain.Contracts;
-using CoffeStore.Tests.Mocks;
 using CoffeStoreService.Tests.Mocks;
 using FluentValidation;
 using Microsoft.Extensions.Logging;
@@ -24,7 +24,7 @@ namespace CoffeStore.Tests.CommandHandlers.Orders
         private IErrorContext _errorContext;
         private ILogger<CreateOrderCommandHandler> _logger;
         private IOrderRepository _repository;
-
+        private ICustomerExternalService _customerService;
         private CreateOrderCommandHandler _handler;
 
         [SetUp]
@@ -35,8 +35,9 @@ namespace CoffeStore.Tests.CommandHandlers.Orders
             _errorContext = new ErrorContext();
             _logger = Substitute.For<ILogger<CreateOrderCommandHandler>>();
             _repository = Substitute.For<IOrderRepository>();
+            _customerService = Substitute.For<ICustomerExternalService>();
 
-            _handler = new CreateOrderCommandHandler(_adapter, _validator, _errorContext, _logger, _repository);
+            _handler = new CreateOrderCommandHandler(_adapter, _validator, _errorContext, _logger, _repository, _customerService);
         }
 
         [Test]
@@ -49,9 +50,11 @@ namespace CoffeStore.Tests.CommandHandlers.Orders
                 DeliveryAddress = CustomerMock.GetCustomerAddress(),
                 OrderItems = new List<OrderItemDto>() { new OrderItemDto { ProductId = Guid.NewGuid(), Quantity = 1 } }
             };
-            _adapter.ConvertToViewModel(Arg.Any<Order>()).Returns(new OrderViewModel() { Id = Guid.NewGuid(), CustomerId = customerId, Amount = default, DeliveryStatus = default, OrderItems = new List<OrderItemViewModel>() });
 
+            _adapter.ConvertToViewModel(Arg.Any<Order>()).Returns(new OrderViewModel() { Id = Guid.NewGuid(), CustomerId = customerId, Amount = default, DeliveryStatus = default, OrderItems = new List<OrderItemViewModel>() });
+            _customerService.CustomerExists(request.CustomerId).Returns(true);
             _repository.AddAsync(Arg.Any<Order>()).Returns(new Order(CustomerMock.GetCustomerAddress(), customerId));
+            
             var result = await _handler.Handle(request, new CancellationToken());
 
             Assert.IsNotNull(result);
@@ -86,10 +89,32 @@ namespace CoffeStore.Tests.CommandHandlers.Orders
                 OrderItems = new List<OrderItemDto>() { new OrderItemDto { ProductId = Guid.NewGuid(), Quantity = 1 } }
             };
 
+            _customerService.CustomerExists(request.CustomerId).Returns(true);
             _repository.AddAsync(Arg.Any<Order>()).Throws<Exception>();
 
             string? errorMessage = Assert.ThrowsAsync<Exception>(async () => await _handler.Handle(request, new CancellationToken())).Message;
 
+            _logger.Received().LogError(errorMessage);
+        }
+
+        [Test]
+        public async Task Add_Order_CustomerNotFound_Returns_Error()
+        {
+            var request = new CreateOrderCommand()
+            {
+                CustomerId = Guid.NewGuid(),
+                DeliveryAddress = CustomerMock.GetCustomerAddress(),
+                OrderItems = new List<OrderItemDto>() { new OrderItemDto { ProductId = Guid.NewGuid(), Quantity = 1 } }
+            };
+
+            string errorMessage = "Customer Not Found";
+
+            _customerService.CustomerExists(request.CustomerId).Returns(false);
+            
+            var result = await _handler.Handle(request, new CancellationToken());
+
+            Assert.IsNull(result);
+            Assert.IsNotNull(_errorContext.GetErrors());
             _logger.Received().LogError(errorMessage);
         }
     }

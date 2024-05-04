@@ -1,4 +1,3 @@
-using CoffeStore.Modules.Customers.Application;
 using CoffeStore.Modules.Customers.Application.Adapters;
 using CoffeStore.Modules.Customers.Application.Commands;
 using CoffeStore.Modules.Customers.Application.Queries;
@@ -19,6 +18,8 @@ using Microsoft.Extensions.Configuration;
 using MassTransit;
 using CoffeStore.Common.MessageModels;
 using CoffeStore.Common.ErrorContext;
+using CoffeStore.Modules.Customers.Application.Endpoints;
+using CoffeStore.Modules.Customers.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,6 +43,8 @@ builder.Services.AddDbContext<CustomerContext>(options =>
 builder.Services.AddSingleton<ICustomerAdapter, CustomerAdapter>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IErrorContext, ErrorContext>();
+
+builder.Services.AddScoped<ICustomerApiService, CustomerApiService>();
 
 builder.Services.AddScoped<IValidator<CreateCustomerCommand>, CreateCustomerCommandValidator>();
 builder.Services.AddScoped<IValidator<CreateCustomerAddressCommand>, CreateCustomerAddressCommandValidator>();

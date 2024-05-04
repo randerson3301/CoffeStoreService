@@ -1,11 +1,11 @@
 ﻿using CoffeStore.Common.ErrorContext;
 using CoffeStore.Modules.Orders.Application.Adapters;
+using CoffeStore.Modules.Orders.Application.ExternalServices.Contracts;
 using CoffeStore.Modules.Orders.Application.ViewModels;
 using CoffeStore.Modules.Orders.Domain;
 using CoffeStore.Modules.Orders.Domain.Contracts;
 using FluentValidation;
 using MediatR;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CoffeStore.Modules.Orders.Application.Commands.Handlers
 {
@@ -16,14 +16,16 @@ namespace CoffeStore.Modules.Orders.Application.Commands.Handlers
         private IErrorContext _errorContext;
         private ILogger<CreateOrderCommandHandler> _logger;
         private IOrderRepository _repository;
+        private ICustomerExternalService _customerService;
 
-        public CreateOrderCommandHandler(IOrderAdapter adapter, IValidator<CreateOrderCommand> validator, IErrorContext errorContext, ILogger<CreateOrderCommandHandler> logger, IOrderRepository repository)
+        public CreateOrderCommandHandler(IOrderAdapter adapter, IValidator<CreateOrderCommand> validator, IErrorContext errorContext, ILogger<CreateOrderCommandHandler> logger, IOrderRepository repository, ICustomerExternalService customerService)
         {
             _adapter = adapter;
             _validator = validator;
             _errorContext = errorContext;
             _logger = logger;
             _repository = repository;
+            _customerService = customerService;
         }
 
         public async Task<OrderViewModel?> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
@@ -34,7 +36,13 @@ namespace CoffeStore.Modules.Orders.Application.Commands.Handlers
             {
                 try
                 {
-                    //TODO: Validar se cliente existe
+                    if (!_customerService.CustomerExists(request.CustomerId))
+                    {
+                        _errorContext.AddError(ErrorType.InvalidOperation, "Customer Not Found");
+                        _logger.LogError("Customer Not Found");
+                        return null;
+                    }
+
                     //TODO: Validar se produto existe
                     Order order = await _repository.AddAsync(_adapter.ConvertToDomain(request));
                     return _adapter.ConvertToViewModel(order);
